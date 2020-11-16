@@ -4,16 +4,16 @@
     %td Picture will be here!
 
   %tr
-    %td{:id => "name"}= @person.name
-    %td{:id => "dob"}= @person.dob
-    %td{:id => "gender"}= @person.gender
+    %td{:id => :name}= @person.name
+    %td{:id => :dob}= @person.dob
+    %td{:id => :gender}= @person.gender
 
   %tr
-    %td{:id => "bio"}= @person.bio
+    %td{:id => :bio}= @person.bio
 
   %tr
-    %td= button_to t(".dislikebutton"), 'dislike', remote: true
-    %td= button_to t(".likebutton"), 'like', remote: true
+    %td= button_to t(".dislikebutton"), :dislike, remote: true
+    %td= button_to t(".likebutton"), :like, remote: true
     //%td= link_to t(".dislikebutton"), :method => :dislike, :remote => true
     //%td= link_to t(".likebutton"), :method => :like, :remote => true
 
