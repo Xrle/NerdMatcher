@@ -1,4 +1,4 @@
-$(<%=:name %>).innerText = <%= @person.name %>;
-$(<%=:dob %>).innerText = <%= @person.dob %>;
-$(<%=:gender %>).innerText = <%= @person.gender %>;
-$(<%=:bio %>).innerText = <%= @person.bio %>;
+$('#name').text('<%= @person.name.to_s %>');
+$('#dob').text('<%= @person.dob.to_s %>');
+$('#gender').text('<%= @person.gender %>');
+$('#bio').text('<%= @person.bio %>');

@@ -4,17 +4,21 @@ class ExploreController < ApplicationController
   end
 
   def like
+    #Refactor explore to partial and swap whole thing in
     get_next
-    respond_to do |format|
-      format.js { render :action => 'update' }
-    end
+    puts(render_to_string(:update))
+    render :update
+    #respond_to do |format|
+    #  format.js { render :update}
+    #end
   end
 
   def dislike
     get_next
-    respond_to do |format|
-      format.js { render :action => 'update'}
-    end
+    render :update
+    #respond_to do |format|
+    #  format.js { render :update}
+    #end
   end
 
   private
