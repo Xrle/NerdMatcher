@@ -6,7 +6,6 @@ class ExploreController < ApplicationController
   def like
     #Refactor explore to partial and swap whole thing in
     get_next
-    puts(render_to_string(:update))
     render :update
     #respond_to do |format|
     #  format.js { render :update}
@@ -46,14 +45,18 @@ class ExploreController < ApplicationController
     #Init unseen array or repopulate if empty
     #@unseen ||= []
     if @unseen == nil
+      puts('init')
       @unseen = []
     end
     if @unseen.length == 0
+      puts('populate')
       @unseen = [*1..Person.count]
     end
+    puts(@unseen)
 
     #Get next unseen person at random
     @person = Person.find_by(id: @unseen.delete_at(rand(@unseen.length)))
+    puts(@unseen)
   end
 
 
