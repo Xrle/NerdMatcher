@@ -1,4 +1,1 @@
-$('#name').text('<%= @person.name.to_s %>');
-$('#dob').text('<%= @person.dob.to_s %>');
-$('#gender').text('<%= @person.gender %>');
-$('#bio').text('<%= @person.bio %>');
+$('#details').html('<%= j(render 'details') %>');
