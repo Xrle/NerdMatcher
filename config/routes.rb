@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :people
   root 'explore#index'
   post 'like', to: 'explore#like'
