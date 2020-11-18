@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   resources :users
   resources :people
   root 'home#index'
-  post 'like', to: 'explore#like'
-  post 'dislike', to: 'explore#dislike'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  #Home routes
+  get 'login' => 'home#login'
+  get 'signup' => 'home#signup'
+  post 'login' => 'home#auth'
+
+  #Explore routes
+  get 'explore' => 'explore#index'
+  post 'explore/like' => 'explore#like'
+  post 'explore/dislike' => 'explore#dislike'
+
 end

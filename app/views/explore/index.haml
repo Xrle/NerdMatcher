@@ -4,8 +4,8 @@
 #buttons
   %table
     %tr
-      %td= button_to t('.dislike_button'), :dislike, remote: true
-      %td= button_to t('.like_button'), :like, remote: true
+      %td= button_to t('.dislike_button'), {action: :dislike}, remote: true
+      %td= button_to t('.like_button'), {action: :like}, remote: true
 
 
 

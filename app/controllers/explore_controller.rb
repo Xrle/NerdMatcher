@@ -5,21 +5,23 @@ class ExploreController < ApplicationController
 
   def like
     get_next
-    render :update
-    #respond_to do |format|
-    #  format.js { render :update}
-    #end
+    update
   end
 
   def dislike
     get_next
-    render :update
-    #respond_to do |format|
-    #  format.js { render :update}
-    #end
+    update
   end
 
   private
+
+  def update
+    get_next
+    respond_to do |format|
+      format.js { render :update}
+    end
+  end
+
   #Get the next person to be shown to the user
   def get_next
 =begin
@@ -44,18 +46,18 @@ class ExploreController < ApplicationController
     #Init unseen array or repopulate if empty
     #@unseen ||= []
     if @unseen == nil
-      puts('init')
+      #puts('init')
       @unseen = []
     end
     if @unseen.length == 0
-      puts('populate')
+      #puts('populate')
       @unseen = [*1..Person.count]
     end
-    puts(@unseen)
+    #puts(@unseen)
 
     #Get next unseen person at random
     @person = Person.find_by(id: @unseen.delete_at(rand(@unseen.length)))
-    puts(@unseen)
+    #puts(@unseen)
   end
 
 

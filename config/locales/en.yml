@@ -33,9 +33,8 @@ en:
   app_title: "NerdMatcher"
 
   home:
-    index:
-      login_button: "Login"
-      signup_button: "Sign up"
+    login: "Log In"
+    signup: "Sign Up"
 
   explore:
     index:
