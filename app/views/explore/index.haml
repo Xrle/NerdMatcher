@@ -1,11 +1,11 @@
-%h1= t(".title")
+%h1= t('.title')
 #details= render 'details'
 
 #buttons
   %table
     %tr
-      %td= button_to t(".dislikebutton"), :dislike, remote: true
-      %td= button_to t(".likebutton"), :like, remote: true
+      %td= button_to t('.dislike_button'), :dislike, remote: true
+      %td= button_to t('.like_button'), :like, remote: true
 
 
 

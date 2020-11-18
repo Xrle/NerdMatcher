@@ -4,7 +4,6 @@ class ExploreController < ApplicationController
   end
 
   def like
-    #Refactor explore to partial and swap whole thing in
     get_next
     render :update
     #respond_to do |format|

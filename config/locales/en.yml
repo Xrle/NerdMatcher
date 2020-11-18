@@ -32,8 +32,13 @@
 en:
   app_title: "NerdMatcher"
 
+  home:
+    index:
+      login_button: "Login"
+      signup_button: "Sign up"
+
   explore:
     index:
       title: "Explore"
-      likebutton: "Like"
-      dislikebutton: "Dislike"
+      like_button: "Like"
+      dislike_button: "Dislike"
