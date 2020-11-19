@@ -1,5 +1,6 @@
 %h1= t('home.login')
-=render 'flash_notify'
+=link_to t("back"), '/'
+=render 'partials/notify'
 
 #login_form
   =form_with do |form|

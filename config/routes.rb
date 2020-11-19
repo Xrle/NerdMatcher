@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   #Home routes
   get 'login' => 'home#login'
-  get 'signup' => 'home#signup'
+  #Signing up gets directed to user controller
+  get 'signup' => 'users#new'
   post 'login' => 'home#auth'
 
   #Explore routes

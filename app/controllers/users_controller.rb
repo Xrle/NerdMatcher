@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  #Creating a new user doesn't require logging in otherwise new users wouldn't be able to sign up
+  skip_before_action :check_logged_in, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users

@@ -2,8 +2,10 @@ class ApplicationController < ActionController::Base
   before_action :check_logged_in
 
   private
+  #Check that the user is logged in to a valid account
   def check_logged_in
-    if session[:userid] == nil
+    if User.find_by(id: session[:userid]) == nil #session[:userid] == nil
+      flash[:error] =
       redirect_to '/'
     end
   end
