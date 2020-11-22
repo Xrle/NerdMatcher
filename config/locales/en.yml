@@ -32,6 +32,7 @@
 en:
   app_title: "NerdMatcher"
   back: "Back"
+  login_error: "The page you are trying to access requires you to be logged in."
 
   home:
     login: "Log In"

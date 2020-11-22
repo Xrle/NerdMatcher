@@ -1,12 +1,13 @@
-%h1= t('home.login')
+=render :partial => 'partials/header', :locals => {:title => t('home.login')}
 =link_to t("back"), '/'
-=render 'partials/notify'
 
-#login_form
+.container
   =form_with do |form|
-    =form.label :name
-    =form.text_field :name
-    =form.label :password
-    =form.text_field :password
+    .form-group
+      =form.label :name
+      =form.text_field :name
+    .form-group
+      =form.label :password
+      =form.text_field :password
     =form.submit t('home.login')
 

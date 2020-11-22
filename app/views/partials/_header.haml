@@ -1,0 +1,14 @@
+-# %h2= title if defined?(title)
+%nav{:class => 'navbar navbar-expand-lg'}
+  -# Title
+  =link_to t('app_title'), '/', class: 'navbar-brand'
+  -if defined?(home)
+    -# Home has a different navbar
+    =link_to 'Log In', '#', class: 'nav-link active'
+    =link_to 'Sign Up', '#', class: 'nav-link active'
+  -else
+    -# Navbar for the rest of the app
+    =link_to 'Explore', '#'
+
+=render 'partials/notify'
+

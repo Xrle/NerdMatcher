@@ -5,7 +5,10 @@ class HomeController < ApplicationController
   end
 
   def login
-
+    #Redirect to explore page if already logged in
+    if session[:userid] != nil
+      redirect_to '/explore'
+    end
   end
 
   def signup
@@ -26,7 +29,7 @@ class HomeController < ApplicationController
       redirect_to action: :login
     else
       session[:userid] = user.id
-      redirect_to '/explore'
+      redirect_to 'explore'
     end
   end
 

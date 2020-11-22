@@ -18,7 +18,7 @@ class ExploreController < ApplicationController
   def update
     get_next
     respond_to do |format|
-      format.js { render :update}
+      format.js { render :update, layout: false }
     end
   end
 
