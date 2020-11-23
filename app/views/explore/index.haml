@@ -1,4 +1,4 @@
-%h1= t('.title')
+=render :partial => 'partials/header', :locals => {:title => t('.title')}
 #details= render 'details'
 
 #buttons

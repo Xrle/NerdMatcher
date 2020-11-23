@@ -37,6 +37,7 @@ en:
   home:
     login: "Log In"
     signup: "Sign Up"
+    logout_notice: "Logged out successfully."
 
   explore:
     index:
