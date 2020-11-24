@@ -7,13 +7,13 @@ class HomeController < ApplicationController
 
   def login
     #Redirect to explore page if already logged in
-    if session[:userid] != nil
+    if session[:username] != nil
       redirect_to '/explore'
     end
   end
 
   def logout
-    session[:userid] = nil
+    session[:username] = nil
     flash[:notice] = t('.logout_notice')
     redirect_to '/'
   end
@@ -22,8 +22,10 @@ class HomeController < ApplicationController
 
   end
 
+  #Stores current username as a session variable if successful.
+  #Username can be used instead of user id as user names are unique and more useful
   def auth
-    user = User.find_by name: params[:name]
+    user = User.find_by(name: params[:name])
     #Check user exists
     if user == nil
       flash[:error] = "User does not exist!"
@@ -35,13 +37,9 @@ class HomeController < ApplicationController
       flash[:error] = "Password incorrect!"
       redirect_to action: :login
     else
-      session[:userid] = user.id
+      session[:username] = user.name
       redirect_to '/explore'
     end
   end
 
-  private
-  def auth_params
-
-  end
 end
