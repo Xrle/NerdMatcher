@@ -39,6 +39,9 @@ en:
 
 
   home:
+    index:
+      welcome: "Welcome to NerdMatcher!"
+      subtext: "Helping you find the gorgeous geek of your dreams."
     login: "Log In"
     signup: "Sign Up"
     logout_notice: "Logged out successfully."

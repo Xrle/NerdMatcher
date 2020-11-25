@@ -1,7 +1,11 @@
 =render 'partials/header'
-.container
-  %table
-    %tr
-      %td= link_to t('home.login'), '/login'
-      %td= link_to t('home.signup'), '/signup'
+.jumbotron.text-center
+  %h1.display-2= t('.welcome')
+  %h1= t('.subtext')
+  #login_buttons
+    =link_to t('home.login'), '/login', class: 'btn btn-primary btn-lg'
+    =link_to t('home.signup'), '/signup', class: 'btn btn-primary btn-lg'
+
+
+
 
