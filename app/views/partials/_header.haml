@@ -21,14 +21,16 @@
 
     -# Right navbar
     %ul.navbar-nav.mr-auto.my-2.my-lg-0
-      -# Show username and log out if logged in
+      -# Show user menu if logged in
       -if session[:username] != nil
-        %li.nav-item
-          =link_to session[:username], '#', class: 'nav-link'
-        %li.nav-item
-          =link_to 'Log Out', '/logout', class: 'nav-link'
+        %li.nav-item.dropdown
+          %a#user_menu.nav-link.dropdown-toggle{:href => '#', :role => 'button', 'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}= 'Logged in as ' + session[:username] + ' '
+          .dropdown-menu{'aria-labelledby' => 'user_menu'}
+            =link_to 'Account', '#', class: 'dropdown-item'
+            =link_to 'Log Out', '/logout', class: 'dropdown-item'
 
-      =link_to t('back'), :back, class: 'nav-link'
+      %li.nav-item
+        =link_to t('back'), :back, class: 'nav-link'
 
 
 -# Display flash messages
