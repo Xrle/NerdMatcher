@@ -1,15 +1,42 @@
-%nav{:class => 'navbar navbar-expand-lg navbar-dark bg-primary'}
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
   -# Title
   =link_to t('app_title'), '/', class: 'navbar-brand'
-  -if session[:username] == nil
-    -# Different navbar if not logged in
-    =link_to 'Log In', '/login', class: 'nav-link active'
-    =link_to 'Sign Up', '/signup', class: 'nav-link active'
-  -else
-    -# Navbar for the rest of the app
-    =link_to 'Explore', '/explore', class: 'nav-link active'
-    =link_to 'Log Out', '/logout', class: 'nav-link active'
-    =link_to session[:username], '#', class: 'nav-link active'
 
-=render 'partials/notify'
+  .collapse.navbar-collapse
+    -# Left navbar
+    %ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+
+      -if session[:username] == nil
+        -# Different navbar if not logged in
+        %li.nav-item
+          =link_to 'Log In', '/login', class: 'nav-link'
+        %li.nav-item
+          =link_to 'Sign Up', '/signup', class: 'nav-link'
+
+      -else
+        -# Navbar for the rest of the app
+        %li.nav-item
+          =link_to 'Explore', '/explore', class: 'nav-link'
+
+
+    -# Right navbar
+    %ul.navbar-nav.mr-auto.my-2.my-lg-0
+      -# Show username and log out if logged in
+      -if session[:username] != nil
+        %li.nav-item
+          =link_to session[:username], '#', class: 'nav-link'
+        %li.nav-item
+          =link_to 'Log Out', '/logout', class: 'nav-link'
+
+      =link_to t('back'), :back, class: 'nav-link'
+
+
+-# Display flash messages
+-flash.each do |key, value|
+  -if key == 'error'
+    -# Style errors as danger alert
+    =content_tag :div, value, class: 'alert alert-danger'
+  -else
+    -# Style anything else as primary
+    =content_tag :div, value, class: 'alert alert-primary'
 

@@ -1,7 +1,0 @@
--flash.each do |key, value|
-  -if key == 'error'
-    -# Style errors as danger alert
-    =content_tag :div, value, class: 'alert alert-danger'
-  -else
-    -# Style anything else as primary
-    =content_tag :div, value, class: 'alert alert-primary'
