@@ -60,5 +60,16 @@ class ExploreController < ApplicationController
     #puts(@unseen)
   end
 
+  private
+  # Generate a sample of people to be shown to the user.
+  # The algorithm runs on these principles:
+  # 1) Show some people that like you.
+  # 2) Show some people that haven't seen you yet
+  # 3) Disliking someone eliminates them from consideration for the next sample
+  # 4) Liking someone that has disliked you makes it possible for them to see you in the next sample
+  # 5) Liking or disliking someone that likes you removes their like flag on you
+  def sample_people
+
+  end
 
 end
