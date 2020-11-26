@@ -1,11 +1,11 @@
 =render 'partials/header'
 #details= render 'details'
 
-#buttons
+#like_dislike
   %table
     %tr
-      %td= button_to t('.dislike_button'), {action: :dislike}, remote: true
-      %td= button_to t('.like_button'), {action: :like}, remote: true
+      %td= button_to t('.dislike_button'), {action: :dislike}, remote: true, class: 'btn btn-secondary'
+      %td= button_to t('.like_button'), {action: :like}, remote: true, class: 'btn btn-primary'
 
 
 
