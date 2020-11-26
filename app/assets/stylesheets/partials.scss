@@ -1,0 +1,10 @@
+#header {
+  nav {
+    .dropdown-menu {
+      //Stop dropdown links from changing colour
+      a:visited {
+        color: #212529;
+      }
+    }
+  }
+}
