@@ -4,12 +4,10 @@ class ExploreController < ApplicationController
   end
 
   def like
-    get_next
     update
   end
 
   def dislike
-    get_next
     update
   end
 
@@ -22,45 +20,41 @@ class ExploreController < ApplicationController
     end
   end
 
+  private
   #Get the next person to be shown to the user
   def get_next
-=begin
-    count = Person.count
-    #Init seen array if undefined
-    session[:seen] ||= []
-    #Reset if everyone has been seen
-    if session[:seen].length >= count
-      session[:seen].clear
+    q = @current_user.queue
+    #Init queue if empty
+    q ||= []
+    if q == []
+      q = sample_people
+      puts("new sample")
+      puts(q)
     end
-
-    #Get next unseen person at random
-    found = false
-    id = nil
-    until found
-      id = rand(1..count)
-      unless session[:seen].include?(id)
-        found = true
+    puts("before")
+    puts(q)
+    #Get next person from queue
+    done = false
+    until done
+      #Try to find next person
+      person = Person.find_by(id: q.pop)
+      #Exit loop if valid person found
+      if person != nil
+        @person = person
+        done = true
+      #Get a fresh sample in the event all ids in the queue are invalid
+      elsif q == []
+        q = sample_people
       end
     end
-=end
-    #Init unseen array or repopulate if empty
-    #@unseen ||= []
-    if @unseen == nil
-      #puts('init')
-      @unseen = []
-    end
-    if @unseen.length == 0
-      #puts('populate')
-      @unseen = [*1..Person.count]
-    end
-    #puts(@unseen)
 
-    #Get next unseen person at random
-    @person = Person.find_by(id: @unseen.delete_at(rand(@unseen.length)))
-    #puts(@unseen)
+    #Save updated queue
+    @current_user.queue = q
+    @current_user.save
+    puts("after")
+    puts(q)
   end
 
-  private
   # Generate a sample of people to be shown to the user.
   # The algorithm runs on these principles:
   # 1) Show some people that like you.
@@ -69,7 +63,7 @@ class ExploreController < ApplicationController
   # 4) Liking someone that has disliked you makes it possible for them to see you in the next sample
   # 5) Liking or disliking someone that likes you removes their like flag on you
   def sample_people
-
+    [1, 2, 3]
   end
 
 end

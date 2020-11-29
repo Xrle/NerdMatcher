@@ -6,7 +6,7 @@
     .collapse.navbar-collapse
       -# Left navbar
       %ul.navbar-nav.mr-auto.mt-2.mt-lg-0
-        -if session[:userid] == nil
+        -if @current_user == nil
           -# Different navbar if not logged in
           %li.nav-item
             =link_to 'Log In', '/login', class: 'nav-link'
@@ -22,9 +22,9 @@
       -# Right navbar
       %ul.navbar-nav.mr-auto.my-2.my-lg-0
         -# Show user menu if logged in
-        -if session[:userid] != nil
+        -if @current_user != nil
           %li.nav-item.dropdown
-            %button#user_menu.btn.nav-link.dropdown-toggle{'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}= 'Logged in as ' + @current_username + ' '
+            %button#user_menu.btn.nav-link.dropdown-toggle{'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}= 'Logged in as ' + @current_user.name + ' '
             .dropdown-menu{'aria-labelledby' => 'user_menu'}
               =link_to 'Account', '#', class: 'dropdown-item'
               =link_to 'Log Out', '/logout', class: 'dropdown-item'
