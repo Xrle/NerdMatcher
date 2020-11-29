@@ -33,6 +33,7 @@ class ExploreController < ApplicationController
     end
     puts("before")
     puts(q)
+
     #Get next person from queue
     done = false
     until done
