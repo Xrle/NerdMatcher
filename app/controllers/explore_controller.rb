@@ -1,18 +1,33 @@
 class ExploreController < ApplicationController
+  before_action :check_db_not_empty
+
   def index
     get_next
   end
 
   def like
+    Like.create(user_id: @current_user.id, person_id: session[:current_person])
+    #Check if other person has disliked you
+    #Dislike.find_by()
     update
   end
 
   def dislike
+    Dislike.create(user_id: @current_user.id, person_id: session[:current_person])
     update
   end
 
   private
+  #Check that people other than the current user exist in the database
+  def check_db_not_empty
+    if Person.count == 1
+      if Person.first.id == @current_user.person_id
+        render 'empty_db' and return
+      end
+    end
+  end
 
+  #Call get_next and return js to update the view
   def update
     get_next
     respond_to do |format|
@@ -20,7 +35,6 @@ class ExploreController < ApplicationController
     end
   end
 
-  private
   #Get the next person to be shown to the user
   def get_next
     q = @current_user.queue
@@ -42,6 +56,8 @@ class ExploreController < ApplicationController
       #Exit loop if valid person found
       if person != nil
         @person = person
+        #Save person id to session
+        session[:current_person] = person.id
         done = true
       #Get a fresh sample in the event all ids in the queue are invalid
       elsif q == []
@@ -63,8 +79,11 @@ class ExploreController < ApplicationController
   # 3) Disliking someone eliminates them from consideration for the next sample
   # 4) Liking someone that has disliked you makes it possible for them to see you in the next sample
   # 5) Liking or disliking someone that likes you removes their like flag on you
+  # 6) Exclude yourself from the sample (of course)
   def sample_people
-    [1, 2, 3]
-  end
+    q = []
 
+
+
+  end
 end

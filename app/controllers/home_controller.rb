@@ -1,25 +1,21 @@
 class HomeController < ApplicationController
   #These actions can be performed without being logged in
-  skip_before_action :check_logged_in, only: [:index, :login, :signup, :auth]
+  skip_before_action :check_logged_in, only: [:index, :login, :auth]
 
   def index
   end
 
   def login
     #Redirect to explore page if already logged in
-    if session[:userid] != nil
+    if session[:user_id] != nil
       redirect_to '/explore'
     end
   end
 
   def logout
-    session[:userid] = nil
+    session[:user_id] = nil
     flash[:notice] = t('.logout_notice')
     redirect_to '/'
-  end
-
-  def signup
-
   end
 
   #Stores current user id as a session variable and redirects to /explore if successful.
@@ -36,7 +32,7 @@ class HomeController < ApplicationController
       flash[:error] = "Password incorrect!"
       redirect_to action: :login
     else
-      session[:userid] = user.id
+      session[:user_id] = user.id
       redirect_to '/explore'
     end
   end
