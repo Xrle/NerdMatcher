@@ -28,6 +28,9 @@ class ApplicationController < ActionController::Base
       user = User.find_by(id: session[:user_id])
       if user != nil
         @current_user = user
+      else
+        #Clear an invalid user_id from session
+        session[:user_id] = nil
       end
     end
 

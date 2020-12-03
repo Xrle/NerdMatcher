@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_224436) do
+ActiveRecord::Schema.define(version: 2020_12_03_222624) do
 
   create_table "dislikes", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_11_30_224436) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "queue"
-    t.integer "person_id"
+    t.integer "person_id", null: false
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
   end
