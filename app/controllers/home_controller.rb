@@ -20,7 +20,7 @@ class HomeController < ApplicationController
 
   #Stores current user id as a session variable and redirects to /explore if successful.
   def auth
-    user = User.find_by(name: params[:name])
+    user = User.find_by(username: params[:username])
     #Check user exists
     if user == nil
       flash[:error] = "User does not exist!"

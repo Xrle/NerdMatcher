@@ -6,22 +6,22 @@ class ExploreController < ApplicationController
   end
 
   def like
-    Like.create(user_id: @current_user.id, person_id: session[:current_person])
+    #Like.create(user_id: @current_user.id, person_id: session[:current_person])
     #Check if other person has disliked you
     #Dislike.find_by()
     update
   end
 
   def dislike
-    Dislike.create(user_id: @current_user.id, person_id: session[:current_person])
+    #Dislike.create(user_id: @current_user.id, person_id: session[:current_person])
     update
   end
 
   private
-  #Check that people other than the current user exist in the database
+  #Check that users other than the current user exist in the database
   def check_db_not_empty
-    if Person.count == 1
-      if Person.first.id == @current_user.person_id
+    if User.count == 1
+      if User.first.id == @current_user.id
         render 'empty_db' and return
       end
     end
@@ -48,16 +48,16 @@ class ExploreController < ApplicationController
     puts("before")
     puts(q)
 
-    #Get next person from queue
+    #Get next user from queue
     done = false
     until done
-      #Try to find next person
-      person = Person.find_by(id: q.pop)
+      #Try to find next user
+      user = User.find_by(id: q.pop)
       #Exit loop if valid person found
-      if person != nil
-        @person = person
-        #Save person id to session
-        session[:current_person] = person.id
+      if user != nil
+        @user = user
+        #Save user id to session
+        session[:displayed_user] = user.id
         done = true
       #Get a fresh sample in the event all ids in the queue are invalid
       elsif q == []
@@ -80,6 +80,7 @@ class ExploreController < ApplicationController
   # 4) Liking someone that has disliked you makes it possible for them to see you in the next sample
   # 5) Liking or disliking someone that likes you removes their like flag on you
   # 6) Exclude yourself from the sample (of course)
+  # 7) Don't show people that you have matched with
   def sample_people
     q = []
 
