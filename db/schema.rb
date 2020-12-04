@@ -10,53 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_222624) do
+ActiveRecord::Schema.define(version: 2020_12_04_002828) do
 
   create_table "dislikes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "disliked_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.integer "person_id", null: false
-    t.index ["person_id"], name: "index_dislikes_on_person_id"
-    t.index ["user_id"], name: "index_dislikes_on_user_id"
+    t.index ["user_id", "disliked_id"], name: "index_dislikes_on_user_id_and_disliked_id", unique: true
   end
 
   create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "liked_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.integer "person_id", null: false
-    t.index ["person_id"], name: "index_likes_on_person_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
+    t.index ["user_id", "liked_id"], name: "index_likes_on_user_id_and_liked_id", unique: true
   end
 
   create_table "matches", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.integer "person_id", null: false
-    t.index ["person_id"], name: "index_matches_on_person_id"
-    t.index ["user_id"], name: "index_matches_on_user_id"
-  end
-
-  create_table "people", force: :cascade do |t|
-    t.string "name", null: false
-    t.date "dob", null: false
-    t.text "bio"
+    t.integer "matched_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "gender"
+    t.index ["user_id", "matched_id"], name: "index_matches_on_user_id_and_matched_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "username", null: false
     t.string "password_digest", null: false
+    t.text "queue"
+    t.string "name", null: false
+    t.date "dob", null: false
+    t.integer "gender", null: false
+    t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "queue"
-    t.integer "person_id", null: false
-    t.index ["name"], name: "index_users_on_name", unique: true
-    t.index ["person_id"], name: "index_users_on_person_id"
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end
