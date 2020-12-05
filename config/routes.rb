@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   #User routes
   get 'signup' => 'users#new'
 
-  post 'users' => 'users#create'
+  post 'signup' => 'users#create'
 
   #Explore routes
   get 'explore' => 'explore#index'

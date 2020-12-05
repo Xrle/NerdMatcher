@@ -30,7 +30,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        #Log user in and redirect to explore
+        session[:user_id] = @user.id
+        format.html { redirect_to '/explore', notice: t('.signup_success') }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -71,6 +73,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :password, :password_confirmation, :name, :dob, :gender)
     end
 end

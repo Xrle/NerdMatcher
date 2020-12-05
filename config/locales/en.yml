@@ -46,6 +46,12 @@ en:
     signup: "Sign Up"
     logout_notice: "Logged out successfully."
 
+  users:
+    signup_success: 'Successfully signed up!'
+    male: "Male"
+    female: "Female"
+    other: "Other"
+
   explore:
     index:
       title: "Explore"
@@ -53,4 +59,5 @@ en:
       dislike_button: "Dislike"
 
     empty_db:
-      error: "Looks like you're the only person we could find in the database! Come back when some more people have signed up."
+      error_1: "Looks like you're the only person we could find in the database!"
+      error_2: "Come back when some more people have signed up."

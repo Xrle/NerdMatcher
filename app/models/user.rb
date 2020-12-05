@@ -1,8 +1,11 @@
 class User < ApplicationRecord
   has_secure_password
-  validates_uniqueness_of :username
   serialize :queue, Array
   enum :gender => [:male, :female, :other]
+
+  #Validations
+  validates_uniqueness_of :username
+  validates_presence_of :username, :name, :dob, :gender
 
   #Different entry points for the like and dislike joins must be declared as their own associations
   # to prevent name collisions
