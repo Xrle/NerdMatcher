@@ -82,7 +82,7 @@ class ExploreController < ApplicationController
   # 6) Exclude yourself from the sample (of course)
   # 7) Don't show people that you have matched with
   def sample_people
-    q = []
+    q = [1,2,3]
 
 
 
