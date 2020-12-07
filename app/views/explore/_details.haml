@@ -5,7 +5,7 @@
     %tr
       %td#name= @user.name
       %td#dob= @user.dob
-      %td#gender= @user.gender
+      %td#gender= t('genders.' + @user.gender)
 
     %tr
       %td#bio= @user.bio

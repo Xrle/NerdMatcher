@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @current_user.update(update_params)
-        format.html { redirect_to '/account', notice: 'User was successfully updated.' }
+        format.html { redirect_to '/account', notice: t('.update_success') }
         format.json { render :show, status: :ok, location: @current_user }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     @current_user.destroy
     session[:user_id] = nil
     respond_to do |format|
-      format.html { redirect_to '/', notice: 'User was successfully destroyed.' }
+      format.html { redirect_to '/', notice: t('.delete_success') }
       format.json { head :no_content }
     end
   end

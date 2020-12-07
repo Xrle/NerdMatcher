@@ -1,40 +1,39 @@
-.container
-  = form_with(url: url, model: user, local: true) do |form|
-    - if user.errors.any?
-      #error_explanation
-        %h2
-          = pluralize(user.errors.count, "error")
-          prohibited this user from being saved:
-        %ul
-          - user.errors.full_messages.each do |message|
-            %li= message
-    -if type == 'new'
-      .form_group
-        =form.label :username
-        =form.text_field :username, class: 'form-control'
+= form_with(url: url, model: user, local: true) do |form|
+  - if user.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - user.errors.full_messages.each do |message|
+          %li= message
+  -if type == 'new'
+    .form_group
+      =form.label :username
+      =form.text_field :username, class: 'form-control'
+  .form-group
+    =form.label :password
+    =form.text_field :password, class: 'form-control'
+  .form-group
+    =form.label :password_confirmation
+    =form.text_field :password_confirmation, class: 'form-control'
+  .form-group
+    =form.label :name
+    =form.text_field :name, class: 'form-control'
+  .form-group
+    =form.label :dob
+    =form.date_field :dob, class: 'form-control'
+  .form-group
+    =form.label :gender
+    %br
+    =form.label :gender_male, t('genders.male')
+    =form.radio_button :gender, 'male'#, class: 'form-control'
+    =form.label :gender_female, t('genders.female')
+    =form.radio_button :gender, 'female'#, class: 'form-control'
+    =form.label :gender_other, t('genders.other')
+    =form.radio_button :gender, 'other'#, class: 'form-control'
+  -if type == 'edit'
     .form-group
-      =form.label :password
-      =form.text_field :password, class: 'form-control'
-    .form-group
-      =form.label :password_confirmation
-      =form.text_field :password_confirmation, class: 'form-control'
-    .form-group
-      =form.label :name
-      =form.text_field :name, class: 'form-control'
-    .form-group
-      =form.label :dob
-      =form.date_field :dob, class: 'form-control'
-    .form-group
-      =form.label :gender
-      %br
-      =form.label :gender_male, t('users.male')
-      =form.radio_button :gender, 'male'#, class: 'form-control'
-      =form.label :gender_female, t('users.female')
-      =form.radio_button :gender, 'female'#, class: 'form-control'
-      =form.label :gender_other, t('users.other')
-      =form.radio_button :gender, 'other'#, class: 'form-control'
-    -if type == 'edit'
-      .form-group
-        =form.label :bio
-        =form.text_area :bio, class: 'form-control'
-    =form.submit class: 'btn btn-primary'
+      =form.label :bio
+      =form.text_area :bio, class: 'form-control'
+  =form.submit class: 'btn btn-primary'

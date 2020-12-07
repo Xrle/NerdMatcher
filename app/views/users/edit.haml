@@ -1,2 +1,4 @@
 =render 'partials/header'
-=render 'form', url: '/account', user: @current_user, type: 'edit'
+.container
+  =render 'form', url: '/account', user: @current_user, type: 'edit'
+  =button_to t('.delete'), '/account', method: :delete, data: {confirm: t('.delete_confirm')}, class: 'btn btn-danger'
