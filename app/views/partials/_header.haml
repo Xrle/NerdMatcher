@@ -1,49 +1,52 @@
 #header
-  %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+  %nav.navbar.is-primary
     -# Title
-    =link_to t('app_title'), '/', class: 'navbar-brand'
+    .navbar-brand
+      =link_to t('app_title'), '/', class: 'navbar-item'
+      -# Hamburger menu for mobile devices
+      %a.navbar-burger
+        %span
+        %span
+        %span
 
-    .collapse.navbar-collapse
+    .navbar-menu
       -# Left navbar
-      %ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+      .navbar-start
         -if @current_user == nil
           -# Different navbar if not logged in
-          %li.nav-item
-            =link_to 'Log In', '/login', class: 'nav-link'
-          %li.nav-item
-            =link_to 'Sign Up', '/signup', class: 'nav-link'
+          =link_to 'Log In', '/login', class: 'navbar-item'
+          =link_to 'Sign Up', '/signup', class: 'navbar-item'
 
         -else
           -# Navbar for the rest of the app
-          %li.nav-item
-            =link_to 'Explore', '/explore', class: 'nav-link'
+          =link_to 'Explore', '/explore', class: 'navbar-item'
 
 
       -# Right navbar
-      %ul.navbar-nav.mr-auto.my-2.my-lg-0
+      .navbar-end
         -# Show user menu if logged in
         -if @current_user != nil
-          %li.nav-item.dropdown
-            %button#user_menu.btn.nav-link.dropdown-toggle{'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}= 'Logged in as ' + @current_user.name + ' '
-            .dropdown-menu{'aria-labelledby' => 'user_menu'}
-              =link_to 'Account', '/account', class: 'dropdown-item'
-              =link_to 'Log Out', '/logout', class: 'dropdown-item'
+          .navbar-item.has-dropdown.is-hoverable
+            %a.navbar-link= 'Logged in as ' + @current_user.name
+            .navbar-dropdown
+              =link_to 'Account', '/account', class: 'navbar-item'
+              =link_to 'Log Out', '/logout', class: 'navbar-item'
 
-        %li.nav-item
-          =link_to t('back'), :back, class: 'nav-link'
+        =link_to t('back'), :back, class: 'navbar-item'
 
 
   -# Display flash messages
   -flash.each do |key, value|
     -if key == 'error'
       -# Style errors as danger alert
-      -type = 'alert-danger'
+      -type = 'is-danger'
     -else
-      -# Style anything else as primary
-      -type = 'alert-primary'
+      -# Style anything else as info
+      -type = 'is-info'
 
-    %div{:class => 'alert ' + type + ' alert-dismissible fade show', :role => 'alert'}
-      =content_tag :div, value
-      %button.close{:type => 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
-        %span{'aria-hidden' => true} &times;
+    %div{class: "message #{type} is-small"}
+      .message-body
+        =value
+        %button.delete.is-pulled-right
+
 
