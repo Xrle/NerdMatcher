@@ -1,4 +1,8 @@
-=render 'partials/header'
-.container
-  %h2= t('.error_1')
-  %h2= t('.error_2')
+#wrapper
+  =render 'partials/header'
+  .section
+    .container.has-text-centered
+      %h2= t('.error_1')
+      %h2= t('.error_2')
+
+=render 'partials/footer'

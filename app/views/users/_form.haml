@@ -7,33 +7,50 @@
       %ul
         - user.errors.full_messages.each do |message|
           %li= message
+
   -if type == 'new'
-    .form_group
+    .field
       =form.label :username
-      =form.text_field :username, class: 'form-control'
-  .form-group
+      .control
+        =form.text_field :username, class: 'input'
+
+  .field
     =form.label :password
-    =form.text_field :password, class: 'form-control'
-  .form-group
+    .control
+    =form.text_field :password, class: 'input'
+  .field
     =form.label :password_confirmation
-    =form.text_field :password_confirmation, class: 'form-control'
-  .form-group
+    .control
+    =form.text_field :password_confirmation, class: 'input'
+  .field
     =form.label :name
-    =form.text_field :name, class: 'form-control'
-  .form-group
+    .control
+    =form.text_field :name, class: 'input'
+  .field
     =form.label :dob
-    =form.date_field :dob, class: 'form-control'
-  .form-group
+    .control
+    =form.date_field :dob, class: 'input'
+  .field
     =form.label :gender
-    %br
-    =form.label :gender_male, t('genders.male')
-    =form.radio_button :gender, 'male'#, class: 'form-control'
-    =form.label :gender_female, t('genders.female')
-    =form.radio_button :gender, 'female'#, class: 'form-control'
-    =form.label :gender_other, t('genders.other')
-    =form.radio_button :gender, 'other'#, class: 'form-control'
+    .control
+      %label.radio
+        =t('genders.male')
+        =form.radio_button :gender, 'male'
+      %label.radio
+        =t('genders.female')
+        =form.radio_button :gender, 'female'
+      %label.radio
+        =t('genders.other')
+        =form.radio_button :gender, 'other'
+
   -if type == 'edit'
-    .form-group
+    .field
       =form.label :bio
-      =form.text_area :bio, class: 'form-control'
-  =form.submit class: 'btn btn-primary'
+      .control
+        =form.text_area :bio, class: 'textarea'
+  .field.is-grouped
+    .control
+      =form.submit class: 'button is-link'
+    -if type == 'edit'
+      .control
+        =button_to t('.delete'), '/account', method: :delete, data: {confirm: t('.delete_confirm')}, class: 'button is-danger'

@@ -1,10 +1,20 @@
-=render 'partials/header'
-.jumbotron.text-center
-  %h1.display-2= t('.welcome')
-  %h1= t('.subtext')
-  #login_buttons
-    =link_to t('home.login'), '/login', class: 'btn btn-primary btn-lg'
-    =link_to t('home.signup'), '/signup', class: 'btn btn-primary btn-lg'
+%section.hero.is-primary.is-fullheight.is-bold
+  .hero-head
+    =render 'partials/header'
+
+  .hero-body
+    .container.has-text-centered
+      %h1.title= t('.welcome')
+      %h1.subtitle= t('.subtext')
+      #login_buttons
+        =link_to t('home.login'), '/login', class: 'button is-link is-large'
+        =link_to t('home.signup'), '/signup', class: 'button is-link is-large'
+
+  .hero-foot
+    =render 'partials/footer'
+
+
+
 
 
 

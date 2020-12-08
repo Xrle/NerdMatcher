@@ -1,10 +1,26 @@
 #header {
   nav {
-    .dropdown-menu {
+    .navbar-dropdown {
+      //Make sure correct color is used on home page
+      a {
+        color: #4a4a4a;
+      }
+
       //Stop dropdown links from changing colour
       a:visited {
-        color: #212529;
+        color: #4a4a4a;
       }
     }
   }
+}
+
+//Make footer sticky
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#wrapper {
+  flex: 1;
 }

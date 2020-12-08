@@ -54,7 +54,7 @@ en:
     update_success: "Profile saved!"
     delete_success: "Account successfully deleted!"
 
-    edit:
+    form:
       delete: "Delete Account"
       delete_confirm: "Are you sure you want to delete your account forever?"
 

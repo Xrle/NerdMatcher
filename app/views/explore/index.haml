@@ -1,12 +1,15 @@
-=render 'partials/header'
-.container
-  #details= render 'details'
+#wrapper
+  =render 'partials/header'
+  .section
+    .container
+      #details= render 'details'
 
-  #like_dislike
-    %table
-      %tr
-        %td= button_to t('.dislike_button'), {action: :dislike}, remote: true, class: 'btn btn-secondary'
-        %td= button_to t('.like_button'), {action: :like}, remote: true, class: 'btn btn-primary'
+      .field.is-grouped
+        .control
+          =button_to t('.dislike_button'), {action: :dislike}, remote: true, class: 'button is-danger explore-button'
+        .control
+          =button_to t('.like_button'), {action: :like}, remote: true, class: 'button is-success explore-button'
 
 
+=render 'partials/footer'
 
