@@ -6,14 +6,17 @@ class ExploreController < ApplicationController
   end
 
   def like
-    #Like.create(user_id: @current_user.id, person_id: session[:current_person])
+    Like.create(user_id: @current_user.id, liked_id: session[:displayed_user])
     #Check if other person has disliked you
-    #Dislike.find_by()
+    dislike = @current_user.disliked_by.where('user_id == ' + @current_user.id.to_s)
+    if dislike != nil
+      dislike.destroy
+    end
     update
   end
 
   def dislike
-    #Dislike.create(user_id: @current_user.id, person_id: session[:current_person])
+    Dislike.create(user_id: @current_user.id, disliked_id: session[:displayed_user])
     update
   end
 
@@ -41,7 +44,7 @@ class ExploreController < ApplicationController
     #Init queue if empty
     q ||= []
     if q == []
-      q = sample_people
+      q = sample_users
       puts("new sample")
       puts(q)
     end
@@ -59,9 +62,9 @@ class ExploreController < ApplicationController
         #Save user id to session
         session[:displayed_user] = user.id
         done = true
-      #Get a fresh sample in the event all ids in the queue are invalid
+      #Get a fresh sample in the event all ids in the queue are invalid or the queue is empty
       elsif q == []
-        q = sample_people
+        q = sample_users
       end
     end
 
@@ -81,10 +84,37 @@ class ExploreController < ApplicationController
   # 5) Liking or disliking someone that likes you removes their like flag on you
   # 6) Exclude yourself from the sample (of course)
   # 7) Don't show people that you have matched with
-  def sample_people
-    q = [1,2,3]
+  #
+  # Points 1, 2, 3, 6 and 7 are covered by this function. Points 4 and 5 are in the like and dislike logic.
+  def sample_users
+    #Init array, we're going to attempt to find a sample of 10 people, ideally 5 of which have liked you.
+    q = []
 
+    #First try to find people that liked you
+    @current_user.liked_by.sample(5).each.pluck(:user_id) do |id|
+      q << id
+      puts("Liked")
+      puts(q)
+    end
 
+    #Populate the rest with unseen people excluding the current user, disliked people, matches and the current contents of q
+    disliked = @current_user.disliked.pluck(:disliked_id)
+    User.where.not(id: @current_user.id).where.not(id: disliked).where.not(id: @current_user.matched).where.not(id: q).order(Arel.sql('RANDOM()')).limit(10 - q.size).pluck(:id).each do |id|
+      q << id
+      puts("Unseen")
+      puts(q)
+    end
 
+    #We could now fill any remaining quota by including disliked people, however if excluding disliked people leaves q empty,
+    # get_next will just call this function again and the dislikes will no longer be valid.
+
+    #Remove dislikes
+    @current_user.disliked.each do |dislike|
+      dislike.destroy
+    end
+
+    #Return shuffled array
+    q.shuffle
   end
+
 end

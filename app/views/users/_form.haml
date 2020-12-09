@@ -1,4 +1,4 @@
-= form_with(url: url, model: user, local: true) do |form|
+= form_with(url: url, model: user, local: true, html: {id: 'user-form'}) do |form|
   - if user.errors.any?
     #error_explanation
       %h2
@@ -17,19 +17,19 @@
   .field
     =form.label :password
     .control
-    =form.text_field :password, class: 'input'
+      =form.text_field :password, class: 'input'
   .field
     =form.label :password_confirmation
     .control
-    =form.text_field :password_confirmation, class: 'input'
+      =form.text_field :password_confirmation, class: 'input'
   .field
     =form.label :name
     .control
-    =form.text_field :name, class: 'input'
+      =form.text_field :name, class: 'input'
   .field
     =form.label :dob
     .control
-    =form.date_field :dob, class: 'input'
+      =form.date_field :dob, class: 'input'
   .field
     =form.label :gender
     .control
@@ -51,6 +51,3 @@
   .field.is-grouped
     .control
       =form.submit class: 'button is-link'
-    -if type == 'edit'
-      .control
-        =button_to t('.delete'), '/account', method: :delete, data: {confirm: t('.delete_confirm')}, class: 'button is-danger'

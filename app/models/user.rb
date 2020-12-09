@@ -11,22 +11,28 @@ class User < ApplicationRecord
   # to prevent name collisions
 
   #Likes
-  has_many :sent_likes, class_name: 'Like', foreign_key: :user_id
-  has_many :received_likes, class_name: 'Like', foreign_key: :liked_id
+  #has_many :sent_likes, class_name: 'Like', foreign_key: :user_id
+  #has_many :received_likes, class_name: 'Like', foreign_key: :liked_id
 
-  has_many :likes, through: :sent_likes, source: :liked
-  has_many :liked_by, through: :received_likes, source: :user
+  #has_many :likes, through: :sent_likes, source: :liked
+  #has_many :liked_by, through: :received_likes, source: :user
+
+  has_many :likes, class_name: 'Like', foreign_key: :user_id
+  has_many :liked_by, class_name: 'Like', foreign_key: :liked_id
 
 
   #Dislikes
-  has_many :sent_dislikes, class_name: 'Dislike', foreign_key: :user_id
-  has_many :received_dislikes, class_name: 'Dislike', foreign_key: :disliked_id
+  #has_many :sent_dislikes, class_name: 'Dislike', foreign_key: :user_id
+  #has_many :received_dislikes, class_name: 'Dislike', foreign_key: :disliked_id
 
-  has_many :dislikes, through: :sent_dislikes, source: :disliked
-  has_many :disliked_by, through: :received_dislikes, source: :user
+  #has_many :dislikes, through: :sent_dislikes, source: :disliked
+  #has_many :disliked_by, through: :received_dislikes, source: :user
+
+  has_many :dislikes, class_name: 'Dislike', foreign_key: :user_id
+  has_many :disliked_by, class_name: 'Dislike', foreign_key: :disliked_id
 
   #Private declarations as should not need to use these associations outside of the model class
-  private :sent_likes, :sent_dislikes, :received_likes, :received_dislikes
+  #private :sent_likes, :sent_dislikes, :received_likes, :received_dislikes
 
   #Matches
   #has_many :sent_matches, class_name: 'Match', foreign_key: :user_id

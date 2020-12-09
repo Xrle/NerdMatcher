@@ -44,9 +44,11 @@
       -# Style anything else as info
       -type = 'is-info'
 
-    %div{class: "message #{type}"}
-      .message-body
+    %div{class: "notification #{type}"}
+      %span
         =value
         %button.delete.is-pulled-right
+
+
 
 
