@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   #Explore routes
   get 'explore' => 'explore#index'
+  get 'explore/no_users' => 'explore#no_users'
 
   post 'explore/like' => 'explore#like'
   post 'explore/dislike' => 'explore#dislike'

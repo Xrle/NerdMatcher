@@ -67,3 +67,7 @@ en:
     empty_db:
       error_1: "Looks like you're the only person we could find in the database!"
       error_2: "Come back when some more people have signed up."
+
+    no_users:
+      error_1: "You've either liked or matched with everyone in our database."
+      error_2: "Good job!"

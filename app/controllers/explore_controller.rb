@@ -7,17 +7,36 @@ class ExploreController < ApplicationController
 
   def like
     Like.create(user_id: @current_user.id, liked_id: session[:displayed_user])
-    #Check if other person has disliked you
-    dislike = @current_user.disliked_by.where('user_id == ' + @current_user.id.to_s)
+    #If the other person disliked you, remove the dislike
+    dislike = @current_user.disliked_by.where('user_id == ' + session[:displayed_user].to_s).first
     if dislike != nil
       dislike.destroy
     end
+
+    #Match if the other person liked you too
+    like = @current_user.liked_by.where('user_id == ' + session[:displayed_user].to_s).first
+    if like != nil
+      Match.create(user_id: @current_user.id, matched_id: session[:displayed_user])
+      like.destroy
+      #Save name of person for notifying user
+      @matched_name = User.find_by(id: session[:displayed_user]).name
+    end
+
     update
   end
 
   def dislike
     Dislike.create(user_id: @current_user.id, disliked_id: session[:displayed_user])
+    #If the other person liked you, remove the like
+    like = @current_user.liked_by.where('user_id == ' + session[:displayed_user].to_s).first
+    if like != nil
+      like.destroy
+    end
     update
+  end
+
+  def no_users
+
   end
 
   private
@@ -33,6 +52,10 @@ class ExploreController < ApplicationController
   #Call get_next and return js to update the view
   def update
     get_next
+    #Don't render an update if get_next failed
+    if @abort
+      return
+    end
     respond_to do |format|
       format.js { render :update, layout: false }
     end
@@ -65,6 +88,15 @@ class ExploreController < ApplicationController
       #Get a fresh sample in the event all ids in the queue are invalid or the queue is empty
       elsif q == []
         q = sample_users
+        #If sample_users then returns another empty array, all other users must either be liked or matched, so redirect to an error page
+        # If somebody was just matched with, save their name to flash
+        if q == []
+          @abort = true
+          if @matched_name != nil
+            flash[:success] = 'Matched with ' + @matched_name + '!'
+          end
+          redirect_to action: :no_users and return
+        end
       end
     end
 
@@ -91,27 +123,25 @@ class ExploreController < ApplicationController
     q = []
 
     #First try to find people that liked you
-    @current_user.liked_by.sample(5).each.pluck(:user_id) do |id|
-      q << id
-      puts("Liked")
-      puts(q)
-    end
+    q.concat(@current_user.liked_by.sample(5).pluck(:user_id))
+    puts("Liked")
+    puts(q)
 
-    #Populate the rest with unseen people excluding the current user, disliked people, matches and the current contents of q
-    disliked = @current_user.disliked.pluck(:disliked_id)
-    User.where.not(id: @current_user.id).where.not(id: disliked).where.not(id: @current_user.matched).where.not(id: q).order(Arel.sql('RANDOM()')).limit(10 - q.size).pluck(:id).each do |id|
-      q << id
-      puts("Unseen")
-      puts(q)
-    end
+    #Populate the rest with unseen people excluding the current user, liked people, disliked people, matches and the current contents of q
+    likes = @current_user.likes.pluck(:liked_id)
+    dislikes = @current_user.dislikes.pluck(:disliked_id)
+    exclude = []
+    exclude.concat(q, likes, dislikes, @current_user.matches, [@current_user.id])
+    q.concat(User.where.not(id: exclude).order(Arel.sql('RANDOM()')).limit(10 - q.size).pluck(:id))
+    puts("Unseen")
+    puts(q)
+
 
     #We could now fill any remaining quota by including disliked people, however if excluding disliked people leaves q empty,
     # get_next will just call this function again and the dislikes will no longer be valid.
 
     #Remove dislikes
-    @current_user.disliked.each do |dislike|
-      dislike.destroy
-    end
+    @current_user.dislikes.destroy_all
 
     #Return shuffled array
     q.shuffle

@@ -1,1 +1,6 @@
 $('#details').html('<%= j(render 'details') %>');
+
+//Add notification dismiss handling to any notifications provided by details
+$('button.delete').click((event) => {
+    $(event.target).parent().parent().remove()
+})

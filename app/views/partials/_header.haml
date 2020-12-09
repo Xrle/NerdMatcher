@@ -40,14 +40,18 @@
     -if key == 'error'
       -# Style errors as danger alert
       -type = 'is-danger'
+
+    -elsif key == 'success'
+      -#Style success as success alert
+      -type = 'is-success'
+
     -else
       -# Style anything else as info
       -type = 'is-info'
 
-    %div{class: "notification #{type}"}
-      %span
-        =value
-        %button.delete.is-pulled-right
+    =render 'partials/notification', type: type, msg: value
+
+
 
 
 
