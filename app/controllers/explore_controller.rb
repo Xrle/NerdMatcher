@@ -119,11 +119,17 @@ class ExploreController < ApplicationController
   #
   # Points 1, 2, 3, 6 and 7 are covered by this function. Points 4 and 5 are in the like and dislike logic.
   def sample_users
-    #Init array, we're going to attempt to find a sample of 10 people, ideally 5 of which have liked you.
+    #Size of the sample to produce
+    sample_size = 10
+
+    #Number of people that liked you to try and include, should be < sample_size
+    liked_quota = 5
+
+    #Init array
     q = []
 
     #First try to find people that liked you
-    q.concat(@current_user.liked_by.sample(5).pluck(:user_id))
+    q.concat(@current_user.liked_by.sample(liked_quota).pluck(:user_id))
     puts("Liked")
     puts(q)
 
@@ -132,7 +138,7 @@ class ExploreController < ApplicationController
     dislikes = @current_user.dislikes.pluck(:disliked_id)
     exclude = []
     exclude.concat(q, likes, dislikes, @current_user.matches, [@current_user.id])
-    q.concat(User.where.not(id: exclude).order(Arel.sql('RANDOM()')).limit(10 - q.size).pluck(:id))
+    q.concat(User.where.not(id: exclude).order(Arel.sql('RANDOM()')).limit(sample_size - q.size).pluck(:id))
     puts("Unseen")
     puts(q)
 
