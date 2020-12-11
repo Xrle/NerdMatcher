@@ -1,24 +1,5 @@
-# README
+# NerdMatcher
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple dating app built using Ruby on Rails for COM2025 Web Applications Development
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Use `bundle install` to install the dependancies and then run it with `rails s`
