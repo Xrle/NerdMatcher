@@ -1,13 +1,4 @@
-= form_with(url: url, model: user, local: true, html: {id: 'user-form'}) do |form|
-  - if user.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(user.errors.count, "error")
-        prohibited this user from being saved:
-      %ul
-        - user.errors.full_messages.each do |message|
-          %li= message
-
+= form_with(url: url, model: user, local: true) do |form|
   -if type == 'new'
     .field
       =form.label :username
@@ -48,6 +39,6 @@
       =form.label :bio
       .control
         =form.text_area :bio, class: 'textarea'
-  .field.is-grouped
+  .field
     .control
       =form.submit class: 'button is-link'

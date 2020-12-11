@@ -30,6 +30,7 @@
             %a.navbar-link= 'Logged in as ' + @current_user.name
             .navbar-dropdown
               =link_to 'Account', '/account', class: 'navbar-item'
+              =link_to 'Photos', '/account/photos', class: 'navbar-item'
               =link_to 'Log Out', '/logout', class: 'navbar-item'
 
         =link_to t('back'), :back, class: 'navbar-item'

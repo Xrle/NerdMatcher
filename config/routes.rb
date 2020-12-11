@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  #Endpoint for resizing uploaded images
+  mount ImageUploader.derivation_endpoint => 'derivations'
+
   #Home routes
   get 'login' => 'home#login'
   post 'login' => 'home#auth'
@@ -21,5 +24,13 @@ Rails.application.routes.draw do
 
   post 'explore/like' => 'explore#like'
   post 'explore/dislike' => 'explore#dislike'
+
+  #Photo routes
+  get 'account/photos' => 'photos#index'
+  get 'account/photos/upload' => 'photos#new'
+
+  post 'account/photos/upload' => 'photos#create'
+
+  delete 'account/photos' => 'photos#destroy'
 
 end

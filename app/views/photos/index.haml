@@ -1,0 +1,19 @@
+#wrapper
+  =render 'partials/header'
+  .section
+    .container
+      =link_to 'Upload', '/account/photos/upload', class: 'button is-link'
+    .container
+      -until @photos == []
+        .tile.is-ancestor
+          -for i in 1..3
+            -photo = @photos.shift
+            -if photo != nil
+              .tile.is-parent
+                .tile.is-child.box
+                  =render 'frame', photo: photo
+
+
+
+
+=render 'partials/footer'

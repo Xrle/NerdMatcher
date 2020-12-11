@@ -1,0 +1,4 @@
+.container
+  =image_tag photo.image.derivation_url(:cropped, 240, 320)
+  =button_to 'Delete', '/account/photos', params: {photo_id: photo.id}, method: :delete, data: {confirm: 'Delete this photo?'}, class: 'button is-danger'
+

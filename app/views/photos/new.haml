@@ -1,0 +1,15 @@
+#wrapper
+  =render 'partials/header'
+  .section
+    .container
+      =form_with(url: account_photos_upload_path, model: @photo, local: true) do |f|
+        =f.hidden_field :image, value: @photo.cached_image_data
+        .field
+          .control
+            =f.file_field :image, class: 'input'
+
+        .field
+          .control
+            =f.submit class: 'button is-link'
+
+=render 'partials/footer'

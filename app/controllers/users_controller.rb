@@ -33,10 +33,9 @@ class UsersController < ApplicationController
         #Log user in and redirect to explore
         session[:user_id] = @user.id
         format.html { redirect_to '/explore', notice: t('.signup_success') }
-        format.json { render :show, status: :created, location: @user }
       else
+        flash.now[:error] = render_to_string :partial => 'partials/errors', :locals => {model: @user}
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -47,10 +46,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @current_user.update(update_params)
         format.html { redirect_to '/account', notice: t('.update_success') }
-        format.json { render :show, status: :ok, location: @current_user }
       else
+        flash.now[:error] = render_to_string :partial => 'partials/errors', :locals => {model: @user}
         format.html { render :edit }
-        format.json { render json: @current_user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,7 +60,6 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     respond_to do |format|
       format.html { redirect_to '/', notice: t('.delete_success') }
-      format.json { head :no_content }
     end
   end
 

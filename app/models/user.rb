@@ -10,6 +10,8 @@ class User < ApplicationRecord
   #Different entry points for the like and dislike joins must be declared as their own associations
   # to prevent name collisions
 
+  has_many :photos
+
   #Likes
   #has_many :sent_likes, class_name: 'Like', foreign_key: :user_id
   #has_many :received_likes, class_name: 'Like', foreign_key: :liked_id

@@ -15,6 +15,13 @@ class HomeController < ApplicationController
   def logout
     session[:user_id] = nil
     flash[:notice] = t('.logout_notice')
+
+    #Normally clearing upload cache would be handled by a rake task on a cron job.
+    # This is impractical for this coursework, so clear the cache when a user logs off instead.
+    puts 'Clearing upload cache...'
+    Shrine.storages[:cache].clear!
+    puts 'Success!'
+
     redirect_to '/'
   end
 
