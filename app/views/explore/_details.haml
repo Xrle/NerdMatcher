@@ -1,5 +1,5 @@
 .card-header
-  %p.card-header-title= @user.name + ' ' + ((Time.zone.now - @user.dob.to_time) / 1.year.seconds).floor.to_s + t('genders.' + @user.gender)[0]
+  %p.card-header-title= @user.name + ', ' + ((Time.zone.now - @user.dob.to_time) / 1.year.seconds).floor.to_s + t('genders.' + @user.gender)[0]
 .card-image.explore-photo
   %figure#photo-figure.image.is-3by4.explore-photo
     -if @photos == []
@@ -14,6 +14,10 @@
         -i += 1
 
 .card-content
+  -# Show success notification if there was a match
+  -if @matched_name != nil
+    =render 'partials/notification', type: 'is-success', msg: 'Matched with ' + @matched_name + '!'
+
   =@user.bio
   %hr
 
@@ -31,9 +35,6 @@
     =button_to t('.dislike_button'), {action: :dislike}, remote: true, class: 'button is-danger explore-button'
     =button_to t('.like_button'), {action: :like}, remote: true, class: 'button is-success explore-button is-pulled-right'
 
--# Show success notification if there was a match
--if @matched_name != nil
-  %tr
-    =render 'partials/notification', type: 'is-success', msg: 'Matched with ' + @matched_name + '!'
+
 
 
