@@ -59,8 +59,7 @@ en:
       delete_confirm: "Are you sure you want to delete your account forever?"
 
   explore:
-    index:
-      title: "Explore"
+    details:
       like_button: "Like"
       dislike_button: "Dislike"
 

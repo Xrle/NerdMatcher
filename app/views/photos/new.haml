@@ -2,7 +2,7 @@
   =render 'partials/header'
   .section
     .container
-      =form_with(url: account_photos_upload_path, model: @photo, local: true) do |f|
+      =form_with(url: '/profile/photos/upload', model: @photo, local: true) do |f|
         =f.hidden_field :image, value: @photo.cached_image_data
         .field
           .control
@@ -11,6 +11,6 @@
         .field
           .control
             =f.submit class: 'button is-link'
-            =link_to 'Cancel', account_photos_path, class: 'button is-light'
+            =link_to 'Cancel', '/profile/photos', class: 'button is-light'
 
 =render 'partials/footer'

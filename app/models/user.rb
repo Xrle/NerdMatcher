@@ -6,6 +6,14 @@ class User < ApplicationRecord
   #Validations
   validates_uniqueness_of :username
   validates_presence_of :username, :name, :dob, :gender
+  validate :dob_before_today?
+
+  def dob_before_today?
+    return if dob.blank?
+    if dob > Date.today
+      errors.add(:dob, 'must be in the past!')
+    end
+  end
 
   #Different entry points for the like and dislike joins must be declared as their own associations
   # to prevent name collisions

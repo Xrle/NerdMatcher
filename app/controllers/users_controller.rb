@@ -47,7 +47,7 @@ class UsersController < ApplicationController
       if @current_user.update(update_params)
         format.html { redirect_to '/account', notice: t('.update_success') }
       else
-        flash.now[:error] = render_to_string :partial => 'partials/errors', :locals => {model: @user}
+        flash.now[:error] = render_to_string :partial => 'partials/errors', :locals => {model: @current_user}
         format.html { render :edit }
       end
     end

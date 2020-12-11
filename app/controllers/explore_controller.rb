@@ -83,6 +83,7 @@ class ExploreController < ApplicationController
       if user != nil
         @user = user
         @photos = user.photos.to_a
+        @photo_count = @photos.size
         #Save user id to session
         session[:displayed_user] = user.id
         done = true

@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   post 'signup' => 'users#create'
 
-  get 'account' => 'users#edit'
-  patch 'account' => 'users#update'
-  delete 'account' => 'users#destroy'
+  get 'profile' => 'users#edit'
+  patch 'profile' => 'users#update'
+  delete 'profile' => 'users#destroy'
 
   #Explore routes
   get 'explore' => 'explore#index'
@@ -26,11 +26,11 @@ Rails.application.routes.draw do
   post 'explore/dislike' => 'explore#dislike'
 
   #Photo routes
-  get 'account/photos' => 'photos#index'
-  get 'account/photos/upload' => 'photos#new'
+  get 'profile/photos' => 'photos#index'
+  get 'profile/photos/upload' => 'photos#new'
 
-  post 'account/photos/upload' => 'photos#create'
+  post 'profile/photos/upload' => 'photos#create'
 
-  delete 'account/photos' => 'photos#destroy'
+  delete 'profile/photos' => 'photos#destroy'
 
 end

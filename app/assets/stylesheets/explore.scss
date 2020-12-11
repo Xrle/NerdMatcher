@@ -3,15 +3,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .explore-card {
-  max-width: 480px;
+  width: 480px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .explore-photo {
-  max-width: 480px;
-  max-height: 640px;
+  width: 480px;
+  height: 640px;
+}
+
+.explore-photo.hide {
+  display: none;
 }
 
 #explore-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+#current-photo-column {
+  margin-top: auto;
+  margin-bottom: auto;
 }

@@ -1,5 +1,5 @@
 #header
-  %nav.navbar.is-primary.is-fixed-top
+  %nav.navbar.is-primary
     -# Title
     .navbar-brand
       =link_to t('app_title'), '/', class: 'navbar-item'
@@ -20,20 +20,16 @@
         -else
           -# Navbar for the rest of the app
           =link_to 'Explore', '/explore', class: 'navbar-item'
+          =link_to 'Profile', '/profile', class: 'navbar-item'
+          =link_to 'Photos', '/profile/photos', class: 'navbar-item'
 
 
       -# Right navbar
       .navbar-end
         -# Show user menu if logged in
         -if @current_user != nil
-          .navbar-item.has-dropdown.is-hoverable
-            %a.navbar-link= 'Logged in as ' + @current_user.name
-            .navbar-dropdown
-              =link_to 'Account', '/account', class: 'navbar-item'
-              =link_to 'Photos', '/account/photos', class: 'navbar-item'
-              =link_to 'Log Out', '/logout', class: 'navbar-item'
-
-        =link_to t('back'), :back, class: 'navbar-item'
+          .navbar-item= 'Logged in as ' + @current_user.name
+          =link_to 'Log Out', '/logout', class: 'navbar-item'
 
 
   -# Display flash messages

@@ -1,16 +1,39 @@
-%table
+.card-header
+  %p.card-header-title= @user.name + ' ' + ((Time.zone.now - @user.dob.to_time) / 1.year.seconds).floor.to_s + t('genders.' + @user.gender)[0]
+.card-image.explore-photo
+  %figure#photo-figure.image.is-3by4.explore-photo
+    -if @photos == []
+      -@first_photo_index = 0
+      =image_tag '/no_photos.png', class: 'explore-photo no-photos'
+    -else
+      -@first_photo_index = 1
+      =image_tag @photos.shift.image.derivation_url(:resized, 480, 640), class: 'explore-photo', id: 'explore-photo-1'
+      -i = 2
+      -until @photos == []
+        =image_tag @photos.shift.image.derivation_url(:resized, 480, 640), class: 'explore-photo hide', id: "explore-photo-#{i}"
+        -i += 1
 
+.card-content
+  =@user.bio
+  %hr
+
+  .columns.is-mobile
+    .column
+      =button_tag 'Previous photo', onclick: 'changePhoto("previous")', class: 'button is-link explore-button'
+
+    .column.has-text-centered#current-photo-column
+      %p#current-photo.is-size-6= "#{@first_photo_index}/#{@photo_count}"
+
+    .column
+      =button_tag 'Next photo', onclick: 'changePhoto("next")', class: 'button is-link explore-button is-pulled-right'
+
+  #explore-buttons
+    =button_to t('.dislike_button'), {action: :dislike}, remote: true, class: 'button is-danger explore-button'
+    =button_to t('.like_button'), {action: :like}, remote: true, class: 'button is-success explore-button is-pulled-right'
+
+-# Show success notification if there was a match
+-if @matched_name != nil
   %tr
-    %td#name= @user.name
-    %td#dob= @user.dob
-    %td#gender= t('genders.' + @user.gender)
-
-  %tr
-    %td#bio= @user.bio
-
-  -# Show success notification if there was a match
-  -if @matched_name != nil
-    %tr
-      =render 'partials/notification', type: 'is-success', msg: 'Matched with ' + @matched_name + '!'
+    =render 'partials/notification', type: 'is-success', msg: 'Matched with ' + @matched_name + '!'
 
 
