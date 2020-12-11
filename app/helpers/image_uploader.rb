@@ -10,7 +10,7 @@ class ImageUploader < Shrine
   end
 
   #Resize images to required dimensions
-  plugin :derivation_endpoint, secret_key: 'y0yo22GjcGCMMDwHwemhy0XWh4fVazdt', prefix: "derivations"
+  plugin :derivation_endpoint, secret_key: Rails.application.credentials.derivation_key, prefix: "derivations"
 
   derivation :resized do |file, width, height|
     ImageProcessing::MiniMagick.source(file).resize_to_fill!(width.to_i, height.to_i)

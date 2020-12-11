@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to '/account/photos', notice: 'Photo uploaded successfully!' }
+        format.html { redirect_to '/profile/photos', notice: 'Photo uploaded successfully!' }
       else
         flash.now[:error] = render_to_string :partial => 'partials/errors', :locals => {model: @photo}
         format.html { render :new }
