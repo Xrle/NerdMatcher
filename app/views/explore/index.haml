@@ -2,13 +2,17 @@
   =render 'partials/header'
   .section
     .container
-      #details= render 'details'
+      .card.explore-card
+        .card-image.explore-photo
+          %figure.image.is-3by4.explore-photo
+            =image_tag '/no_photos.png', class: 'explore-photo'
 
-      .field.is-grouped
-        .control
-          =button_to t('.dislike_button'), {action: :dislike}, remote: true, class: 'button is-danger explore-button'
-        .control
-          =button_to t('.like_button'), {action: :like}, remote: true, class: 'button is-success explore-button'
+        .card-content
+          #details= render 'details'
+
+          #explore-buttons
+            =button_to t('.dislike_button'), {action: :dislike}, remote: true, class: 'button is-danger explore-button'
+            =button_to t('.like_button'), {action: :like}, remote: true, class: 'button is-success explore-button'
 
 
 =render 'partials/footer'

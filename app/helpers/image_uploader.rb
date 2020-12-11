@@ -9,12 +9,10 @@ class ImageUploader < Shrine
     validate_max_size 10*1024*1024
   end
 
-  #Crop images and save to storage to avoid reprocessing each time the page loads
-  plugin :derivation_endpoint, secret_key: 'y0yo22GjcGCMMDwHwemhy0XWh4fVazdt', prefix: "derivations", upload: true
+  #Resize images to required dimensions
+  plugin :derivation_endpoint, secret_key: 'y0yo22GjcGCMMDwHwemhy0XWh4fVazdt', prefix: "derivations"
 
-  derivation :cropped do |file, width, height|
-    ImageProcessing::MiniMagick
-      .source(file)
-      .resize_to_limit!(width.to_i, height.to_i)
+  derivation :resized do |file, width, height|
+    ImageProcessing::MiniMagick.source(file).resize_to_fill!(width.to_i, height.to_i)
   end
 end

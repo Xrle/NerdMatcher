@@ -1,0 +1,9 @@
+.card
+  .card-image
+    %figure.image.is-3by4
+      =image_tag photo.image.derivation_url(:resized, 480, 640)
+
+  .card-content.has-text-centered
+    =button_to 'Delete', '/account/photos', params: {photo_id: photo.id}, method: :delete, data: {confirm: 'Delete this photo?'}, class: 'button is-danger'
+
+

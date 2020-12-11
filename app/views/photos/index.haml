@@ -1,17 +1,24 @@
 #wrapper
   =render 'partials/header'
   .section
-    .container
+    .container.has-text-centered
+      %p.title Your Photos
+      %p.subtitle These will be displayed on your profile
       =link_to 'Upload', '/account/photos/upload', class: 'button is-link'
+  .section
     .container
+      -#Display photos in a grid with 3 columns
       -until @photos == []
         .tile.is-ancestor
           -for i in 1..3
             -photo = @photos.shift
             -if photo != nil
               .tile.is-parent
-                .tile.is-child.box
-                  =render 'frame', photo: photo
+                .tile.is-child
+                  =render 'photo_card', photo: photo
+            -else
+              .tile.is-parent
+                .tile.is-child
 
 
 

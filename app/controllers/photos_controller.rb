@@ -1,8 +1,6 @@
 class PhotosController < ApplicationController
   def index
     @photos = @current_user.photos.to_a
-    puts @photos.shift
-    puts @photos
   end
 
   def new

@@ -82,6 +82,7 @@ class ExploreController < ApplicationController
       #Exit loop if valid person found
       if user != nil
         @user = user
+        @photos = user.photos.to_a
         #Save user id to session
         session[:displayed_user] = user.id
         done = true
