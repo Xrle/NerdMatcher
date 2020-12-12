@@ -6,7 +6,6 @@ class ExploreController < ApplicationController
   end
 
   def like
-    Like.create(user_id: @current_user.id, liked_id: session[:displayed_user])
     #If the other person disliked you, remove the dislike
     dislike = @current_user.disliked_by.where('user_id == ' + session[:displayed_user].to_s).first
     if dislike != nil
@@ -20,6 +19,9 @@ class ExploreController < ApplicationController
       like.destroy
       #Save name of person for notifying user
       @matched_name = User.find_by(id: session[:displayed_user]).name
+    else
+      #Only create the like if there was no match, otherwise there will be a like and a match recorded
+      Like.create(user_id: @current_user.id, liked_id: session[:displayed_user])
     end
 
     update
@@ -68,11 +70,7 @@ class ExploreController < ApplicationController
     q ||= []
     if q == []
       q = sample_users
-      puts("new sample")
-      puts(q)
     end
-    puts("before")
-    puts(q)
 
     #Get next user from queue
     done = false
@@ -105,8 +103,6 @@ class ExploreController < ApplicationController
     #Save updated queue
     @current_user.queue = q
     @current_user.save
-    puts("after")
-    puts(q)
   end
 
   # Generate a sample of people to be shown to the user.
@@ -132,8 +128,6 @@ class ExploreController < ApplicationController
 
     #First try to find people that liked you
     q.concat(@current_user.liked_by.sample(liked_quota).pluck(:user_id))
-    puts("Liked")
-    puts(q)
 
     #Populate the rest with unseen people excluding the current user, liked people, disliked people, matches and the current contents of q
     likes = @current_user.likes.pluck(:liked_id)
@@ -141,9 +135,6 @@ class ExploreController < ApplicationController
     exclude = []
     exclude.concat(q, likes, dislikes, @current_user.matches, [@current_user.id])
     q.concat(User.where.not(id: exclude).order(Arel.sql('RANDOM()')).limit(sample_size - q.size).pluck(:id))
-    puts("Unseen")
-    puts(q)
-
 
     #We could now fill any remaining quota by including disliked people, however if excluding disliked people leaves q empty,
     # get_next will just call this function again and the dislikes will no longer be valid.
