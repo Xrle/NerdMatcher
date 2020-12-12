@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   #These actions can be performed without being logged in
-  skip_before_action :check_logged_in, only: [:index, :login, :auth]
+  skip_before_action :check_logged_in, only: [:index, :login, :auth, :contact, :send_contact_email]
 
   def index
   end
@@ -42,6 +42,46 @@ class HomeController < ApplicationController
       session[:user_id] = user.id
       redirect_to '/explore'
     end
+  end
+
+  def contact
+  end
+
+  def send_contact_email
+    name = params[:name]
+    email = params[:email]
+    message = params[:message]
+    errors = []
+
+    #Validate name
+    if name.blank?
+      errors << "Name can't be blank"
+    end
+
+    #validate email
+    if email.blank?
+      errors << "Email can't be blank"
+    elsif email !~ URI::MailTo::EMAIL_REGEXP
+      errors << 'Invalid email'
+    end
+
+    #Validate message
+    if message.blank?
+      errors << "Message can't be blank"
+    end
+
+    #Either send the email or show the errors
+    puts(errors)
+    if errors == []
+      ContactMailer.contact_email(name, email, message).deliver_now
+      flash[:notice] = 'Email sent!'
+    else
+      flash[:error] = render_to_string :partial => 'contact_errors', :locals => {errors: errors}
+    end
+
+    #Refresh the page
+    redirect_to action: :contact
+
   end
 
 end

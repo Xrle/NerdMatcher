@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get 'login' => 'home#login'
   post 'login' => 'home#auth'
 
+  get 'contact' => 'home#contact'
+  post 'contact' => 'home#send_contact_email'
+
   get 'logout' => 'home#logout'
 
   #User routes
@@ -27,10 +30,10 @@ Rails.application.routes.draw do
 
   #Photo routes
   get 'profile/photos' => 'photos#index'
-  get 'profile/photos/upload' => 'photos#new'
+  delete 'profile/photos' => 'photos#destroy'
 
+  get 'profile/photos/upload' => 'photos#new'
   post 'profile/photos/upload' => 'photos#create'
 
-  delete 'profile/photos' => 'photos#destroy'
 
 end

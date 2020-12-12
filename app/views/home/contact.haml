@@ -1,0 +1,24 @@
+#wrapper
+  =render 'partials/header'
+  .section
+    .container.has-text-centered
+      %p.title Contact us
+    .container
+      =form_with do |form|
+        .field
+          =form.label :name
+          .control
+            =form.text_field :name, class: 'input'
+        .field
+          =form.label :email
+          .control
+            =form.text_field :email, class: 'input'
+        .field
+          =form.label :message
+          .control
+            =form.text_area :message, class: 'textarea'
+        .field
+          .control
+            =form.submit 'Send', class: 'button is-link'
+
+=render 'partials/footer'
