@@ -33,6 +33,15 @@ en:
   app_title: "NerdMatcher"
   back: "Back"
   login_error: "The page you are trying to access requires you to be logged in."
+  clear_cache_progress: "Clearing upload cache..."
+  clear_cache_success: "Success!"
+
+
+  activerecord:
+    attributes:
+      user:
+        dob: "Date of Birth"
+
 
   genders:
     male: "Male"
@@ -49,6 +58,24 @@ en:
     signup: "Sign Up"
     logout_notice: "Logged out successfully."
 
+    auth:
+      user_not_exists: "User does not exist!"
+      incorrect_password: "Password incorrect!"
+
+    send_contact_email:
+      blank_name: "Name can't be blank"
+      blank_email: "Email can't be blank"
+      invalid_email: "Invalid email"
+      blank_message: "Message can't be blank"
+      email_sent: "Email sent!"
+
+    contact_errors:
+      title: "Could not send email:"
+
+    contact:
+      send: "Send"
+
+
   users:
     signup_success: "Successfully signed up!"
     update_success: "Profile saved!"
@@ -58,10 +85,19 @@ en:
       delete: "Delete Account"
       delete_confirm: "Are you sure you want to delete your account forever?"
 
+    form:
+      sign_up: "Sign Up"
+      save_profile: "Save Profile"
+
+
   explore:
+    matched: "Matched with %{name}!"
+
     details:
       like_button: "Like"
       dislike_button: "Dislike"
+      previous_photo: "Previous Photo"
+      next_photo: "Next Photo"
 
     empty_db:
       error_1: "Looks like you're the only person we could find in the database!"
@@ -70,3 +106,66 @@ en:
     no_users:
       error_1: "You've either liked or matched with everyone in our database."
       error_2: "Good job!"
+
+
+  chat:
+    not_matched: "You haven't matched with that user!"
+    unmatched: "Unmatched with %{name}."
+
+    match_card:
+      unmatch_confirm: "Unmatch with %{name}?"
+      unmatch: "Unmatch"
+      chat: "Chat"
+
+    index:
+      title: "Your Matches"
+      no_matches_1: "You have no matches!"
+      no_matches_2: "Forever alone :("
+
+    chat:
+      send: "Send"
+
+
+  photos:
+    uploaded: "Photo uploaded successfully!"
+    deleted: "Photo deleted successfully!"
+    delete_denied: "You don't have permission to delete this photo!"
+
+    photo_card:
+      delete: "Delete"
+      delete_confirm: "Delete this photo?"
+
+    index:
+      title: "Your Photos"
+      subtitle: "These will be displayed on your profile"
+      upload: "Upload"
+
+    new:
+      cancel: "Cancel"
+
+
+  match:
+    reverse_error: "This match exists in reverse!"
+
+
+  user:
+    dob_past: "must be in the past!"
+
+
+  partials:
+    errors:
+      title: "The following errors occurred:"
+
+    footer:
+      content: " by Chris Digby %{year}"
+      contact_us: "Contact Us"
+
+    header:
+      log_in: "Log In"
+      sign_up: "Sign Up"
+      explore: "Explore"
+      chat: "Chat"
+      profile: "Profile"
+      photos: "Photos"
+      log_out: "Log Out"
+      logged_in: "Logged in as %{name}"

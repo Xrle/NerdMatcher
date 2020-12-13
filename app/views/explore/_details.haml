@@ -16,20 +16,20 @@
 .card-content
   -# Show success notification if there was a match
   -if @matched_name != nil
-    =render 'partials/notification', type: 'is-success', msg: 'Matched with ' + @matched_name + '!'
+    =render 'partials/notification', type: 'is-success', msg: t('explore.matched', name: @matched_name)
 
   =@user.bio
   %hr
 
   .columns.is-mobile
     .column
-      =button_tag 'Previous photo', onclick: 'changePhoto("previous")', class: 'button is-link explore-button'
+      =button_tag t('.previous_photo'), onclick: 'changePhoto("previous")', class: 'button is-link explore-button'
 
     .column.has-text-centered#current-photo-column
       %p#current-photo.is-size-6= "#{@first_photo_index}/#{@photo_count}"
 
     .column
-      =button_tag 'Next photo', onclick: 'changePhoto("next")', class: 'button is-link explore-button is-pulled-right'
+      =button_tag t('.next_photo'), onclick: 'changePhoto("next")', class: 'button is-link explore-button is-pulled-right'
 
   #explore-buttons
     =button_to t('.dislike_button'), {action: :dislike}, remote: true, class: 'button is-danger explore-button'

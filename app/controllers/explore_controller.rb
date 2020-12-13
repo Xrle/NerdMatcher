@@ -7,13 +7,13 @@ class ExploreController < ApplicationController
 
   def like
     #If the other person disliked you, remove the dislike
-    dislike = @current_user.disliked_by.where('user_id == ' + session[:displayed_user].to_s).first
+    dislike = @current_user.disliked_by.where(user_id: session[:displayed_user]).first
     if dislike != nil
       dislike.destroy
     end
 
     #Match if the other person liked you too
-    like = @current_user.liked_by.where('user_id == ' + session[:displayed_user].to_s).first
+    like = @current_user.liked_by.where(user_id: session[:displayed_user]).first
     if like != nil
       Match.create(user_id: @current_user.id, matched_id: session[:displayed_user])
       like.destroy
@@ -30,7 +30,7 @@ class ExploreController < ApplicationController
   def dislike
     Dislike.create(user_id: @current_user.id, disliked_id: session[:displayed_user])
     #If the other person liked you, remove the like
-    like = @current_user.liked_by.where('user_id == ' + session[:displayed_user].to_s).first
+    like = @current_user.liked_by.where(user_id: session[:displayed_user]).first
     if like != nil
       like.destroy
     end
@@ -38,7 +38,6 @@ class ExploreController < ApplicationController
   end
 
   def no_users
-
   end
 
   private
@@ -93,7 +92,7 @@ class ExploreController < ApplicationController
         if q == []
           @abort = true
           if @matched_name != nil
-            flash[:success] = 'Matched with ' + @matched_name + '!'
+            flash[:success] = t('.matched', name: @matched_name)
           end
           redirect_to action: :no_users and return
         end

@@ -4,7 +4,7 @@
     .container.has-text-centered.block
       %p.title
         =@user.name
-        =link_to 'Back', '/matches', class: 'button is-link'
+        =link_to t('back'), '/matches', class: 'button is-link'
     .container.chat-container.block
       %iframe.chat-window{src: "/chat/show_messages?id=#{params[:id]}"}
     .container
@@ -13,6 +13,6 @@
           .control.is-expanded
             =f.text_field :message, class: 'input'
           .control
-            =f.submit 'Send', class: 'button is-link'
+            =f.submit t('.send'), class: 'button is-link'
 
 =render 'partials/footer'

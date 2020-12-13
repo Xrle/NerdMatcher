@@ -14,23 +14,23 @@
       .navbar-start
         -if @current_user == nil
           -# Different navbar if not logged in
-          =link_to 'Log In', '/login', class: 'navbar-item'
-          =link_to 'Sign Up', '/signup', class: 'navbar-item'
+          =link_to t('.log_in'), '/login', class: 'navbar-item'
+          =link_to t('.sign_up'), '/signup', class: 'navbar-item'
 
         -else
           -# Navbar for the rest of the app
-          =link_to 'Explore', '/explore', class: 'navbar-item'
-          =link_to 'Chat', '/matches', class: 'navbar-item'
-          =link_to 'Profile', '/profile', class: 'navbar-item'
-          =link_to 'Photos', '/profile/photos', class: 'navbar-item'
+          =link_to t('.explore'), '/explore', class: 'navbar-item'
+          =link_to t('.chat'), '/matches', class: 'navbar-item'
+          =link_to t('.profile'), '/profile', class: 'navbar-item'
+          =link_to t('.photos'), '/profile/photos', class: 'navbar-item'
 
 
       -# Right navbar
       .navbar-end
         -# Show user menu if logged in
         -if @current_user != nil
-          .navbar-item= 'Logged in as ' + @current_user.name
-          =link_to 'Log Out', '/logout', class: 'navbar-item'
+          .navbar-item= t('.logged_in', name: @current_user.name)
+          =link_to t('.log_out'), '/logout', class: 'navbar-item'
 
 
   -# Display flash messages

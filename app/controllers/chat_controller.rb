@@ -13,8 +13,8 @@ class ChatController < ApplicationController
   def show_messages
     #Get all messages and mark unread ones as read
     @user = User.find_by(id: params[:id])
-    sent_messages = @current_user.messages.where("target_id == #{@user.id}")
-    received_messages = @current_user.received_messages.where("user_id == #{@user.id}")
+    sent_messages = @current_user.messages.where(target_id: @user.id)
+    received_messages = @current_user.received_messages.where(user_id: @user.id)
     @messages = sent_messages.union_all(received_messages).order('messages.created_at ASC')
 
     respond_to do |format|
@@ -56,7 +56,7 @@ class ChatController < ApplicationController
         @current_user.messages.where(target_id: params[:id]).destroy_all
         @current_user.received_messages.where(user_id: params[:id]).destroy_all
         match.destroy
-        format.html { redirect_to '/matches', notice: "Unmatched with #{params[:name]}!" }
+        format.html { redirect_to '/matches', notice: t('.unmatched', name: params[:name]) }
       end
     end
   end
@@ -65,7 +65,7 @@ class ChatController < ApplicationController
   def check_matched
     #Check user has matched with the requested user
     unless @current_user.matches.include?(params[:id].to_i)
-      flash[:error] = "You haven't matched with that user!"
+      flash[:error] = t('.not_matched')
       redirect_to action: :index
     end
   end

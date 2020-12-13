@@ -2,9 +2,9 @@
   =render 'partials/header'
   .section
     .container.has-text-centered
-      %p.title Your Photos
-      %p.subtitle These will be displayed on your profile
-      =link_to 'Upload', '/profile/photos/upload', class: 'button is-link'
+      %p.title= t('.title')
+      %p.subtitle= t('.subtitle')
+      =link_to t('.upload'), '/profile/photos/upload', class: 'button is-link'
   .section
     .container
       -#Display photos in a grid with 3 columns

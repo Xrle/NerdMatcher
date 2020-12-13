@@ -18,9 +18,9 @@ class HomeController < ApplicationController
 
     #Normally clearing upload cache would be handled by a rake task on a cron job.
     # This is impractical for this coursework, so clear the cache when a user logs off instead.
-    puts 'Clearing upload cache...'
+    puts t('clear_cache_progress')
     Shrine.storages[:cache].clear!
-    puts 'Success!'
+    puts t('clear_cache_success')
 
     redirect_to '/'
   end
@@ -30,13 +30,13 @@ class HomeController < ApplicationController
     user = User.find_by(username: params[:username])
     #Check user exists
     if user == nil
-      flash[:error] = "User does not exist!"
+      flash[:error] = t('.user_not_exists')
       redirect_to action: :login and return
     end
 
     #Check for correct password
     if user.authenticate(params[:password]) == false
-      flash[:error] = "Password incorrect!"
+      flash[:error] = t('.incorrect_password')
       redirect_to action: :login
     else
       session[:user_id] = user.id
@@ -55,26 +55,26 @@ class HomeController < ApplicationController
 
     #Validate name
     if name.blank?
-      errors << "Name can't be blank"
+      errors << t('.blank_name')
     end
 
     #validate email
     if email.blank?
-      errors << "Email can't be blank"
+      errors << t('.blank_email')
     elsif email !~ URI::MailTo::EMAIL_REGEXP
-      errors << 'Invalid email'
+      errors << t('.invalid_email')
     end
 
     #Validate message
     if message.blank?
-      errors << "Message can't be blank"
+      errors << t('.blank_message')
     end
 
     #Either send the email or show the errors
     puts(errors)
     if errors == []
       ContactMailer.contact_email(name, email, message).deliver_now
-      flash[:notice] = 'Email sent!'
+      flash[:notice] = t('.email_sent')
     else
       flash[:error] = render_to_string :partial => 'contact_errors', :locals => {errors: errors}
     end

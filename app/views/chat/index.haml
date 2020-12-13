@@ -4,10 +4,10 @@
     .container.has-text-centered.block
       -#Show title
       -if @matches != []
-        %p.title Your Matches
+        %p.title= t('.title')
       -else
-        %p.title You have no matches!
-        %p.subtitle Forever alone :(
+        %p.title= t('.no_matches_1')
+        %p.subtitle= t('.no_matches_2')
     .container
       -#Display matches in a grid with 3 columns
       -until @matches == []

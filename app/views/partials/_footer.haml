@@ -1,5 +1,6 @@
 %footer.footer
   .content.has-text-centered
-    <strong>NerdMatcher</strong> by Chris Digby #{Date.current.year}
+    %strong= t('app_title')
+    =t('.content', year: Date.current.year)
     %br
-    =link_to 'Contact us', '/contact', class: 'is-link'
+    =link_to t('.contact_us'), '/contact', class: 'is-link'

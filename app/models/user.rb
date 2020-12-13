@@ -11,7 +11,7 @@ class User < ApplicationRecord
   def dob_before_today?
     return if dob.blank?
     if dob > Date.today
-      errors.add(:dob, 'must be in the past!')
+      errors.add(:dob, t('user.dob_past'))
     end
   end
 

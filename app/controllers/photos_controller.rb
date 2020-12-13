@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to '/profile/photos', notice: 'Photo uploaded successfully!' }
+        format.html { redirect_to '/profile/photos', notice: t('.uploaded') }
       else
         flash.now[:error] = render_to_string :partial => 'partials/errors', :locals => {model: @photo}
         format.html { render :new }
@@ -30,9 +30,9 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if photo != nil
         photo.destroy
-        format.html { redirect_to '/profile/photos', notice: 'Successfully deleted photo!' }
+        format.html { redirect_to '/profile/photos', notice: t('.deleted') }
       else
-        flash[:error] = "You don't have permission to delete this photo!"
+        flash[:error] = t('.delete_denied')
         format.html { redirect_to '/profile/photos'}
       end
     end

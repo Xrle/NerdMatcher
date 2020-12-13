@@ -1,4 +1,5 @@
 = form_with(url: url, model: user, local: true) do |form|
+  -submit_label = t('.sign_up')
   -if type == 'new'
     .field
       =form.label :username
@@ -35,10 +36,11 @@
         =form.radio_button :gender, 'other'
 
   -if type == 'edit'
+    -submit_label = t('.save_profile')
     .field
       =form.label :bio
       .control
         =form.text_area :bio, class: 'textarea'
   .field
     .control
-      =form.submit class: 'button is-link'
+      =form.submit submit_label, class: 'button is-link'

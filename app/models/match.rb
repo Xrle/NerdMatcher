@@ -20,7 +20,7 @@ class Match < ApplicationRecord
   #If A -> B exists in the database, disallow adding B -> A
   def does_not_exist_in_reverse
     if Match.exists?(user_id: matched_id, matched_id: user_id)
-      errors.add(:user_id, 'This match exists in reverse!')
+      errors.add(:user_id, t('match.reverse_error'))
     end
   end
 end
