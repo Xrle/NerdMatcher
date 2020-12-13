@@ -5,7 +5,7 @@ class SocketChannel < ApplicationCable::Channel
     if user_id != nil
       stream_for user_id
     else
-      reject_unauthorized_connection
+      reject
     end
   end
 
