@@ -3,6 +3,7 @@
   .section
     .container.has-text-centered
       %p.title Your Profile
+
     .container
       =render 'form', url: '/profile', user: @current_user, type: 'edit'
       =button_to t('.delete'), '/profile', method: :delete, data: {confirm: t('.delete_confirm')}, class: 'button is-danger'

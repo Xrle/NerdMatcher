@@ -35,5 +35,11 @@ Rails.application.routes.draw do
   get 'profile/photos/upload' => 'photos#new'
   post 'profile/photos/upload' => 'photos#create'
 
+  #Chat routes
+  get 'matches' => 'chat#index'
+  get 'chat', to: 'chat#chat'
+  get 'chat/show_messages', to: 'chat#show_messages'
+  post 'chat', to: 'chat#send_message'
+
 
 end

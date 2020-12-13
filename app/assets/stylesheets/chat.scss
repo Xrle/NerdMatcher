@@ -1,0 +1,38 @@
+// Place all the styles related to the Chat controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.card-footer-item {
+  color: #3273dc;
+}
+
+.card-footer-item:visited {
+  color: #3273dc;
+}
+
+.card-footer-item:hover {
+  background-color: transparent;
+  color: #666;
+}
+
+.match-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-container {
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.chat-window {
+  flex-grow: 1;
+  //Couldn't find a way to set this dynamically
+  height: 600px;
+}
+
+#messages{
+  margin-right: auto;
+  margin-left: auto;
+}

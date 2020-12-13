@@ -1,0 +1,7 @@
+#messages.container
+  -@messages.each do |m|
+    -if m.user_id == @current_user.id
+      =render 'message', type: 'sent', content: m.content
+    -else
+      =render 'message', type: 'received', content: m.content
+  %hr

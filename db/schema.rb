@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_182335) do
+ActiveRecord::Schema.define(version: 2020_12_12_201751) do
 
   create_table "dislikes", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2020_12_10_182335) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "matched_id"], name: "index_matches_on_user_id_and_matched_id", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "read", default: false, null: false
+    t.integer "target_id", null: false
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|

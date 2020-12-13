@@ -1,0 +1,19 @@
+#wrapper
+  =render 'partials/header'
+  .section
+    .container.has-text-centered.block
+      %p.title
+        =@user.name
+        =link_to 'Back', '/matches', class: 'button is-link'
+    .container.chat-container.block
+      %iframe.chat-window{src: "/chat/show_messages?id=#{params[:id]}"}
+    .container
+      =form_with url: "/chat?id=#{@user.id}", html: {:id => "chat-box"} do |f|
+        .field
+          .control
+            =f.text_area :message, class: 'textarea'
+        .field
+          .control
+            =f.submit 'Send', class: 'button is-link is-pulled-right'
+
+=render 'partials/footer'
