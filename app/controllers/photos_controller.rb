@@ -30,10 +30,10 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if photo != nil
         photo.destroy
-        format.html { redirect_to action: :index, notice: 'Successfully deleted photo!' }
+        format.html { redirect_to '/profile/photos', notice: 'Successfully deleted photo!' }
       else
         flash[:error] = "You don't have permission to delete this photo!"
-        format.html { redirect_to action: :index}
+        format.html { redirect_to '/profile/photos'}
       end
     end
   end

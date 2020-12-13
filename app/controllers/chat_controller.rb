@@ -49,14 +49,14 @@ class ChatController < ApplicationController
     if match == nil
       match = Match.where(user_id: params[:id], matched_id: @current_user.id).first
     end
-    
+
     respond_to do |format|
       if match != nil
         #Delete messages
         @current_user.messages.where(target_id: params[:id]).destroy_all
         @current_user.received_messages.where(user_id: params[:id]).destroy_all
         match.destroy
-        format.html { redirect_to action: :index, notice: "Unmatched with #{params[:name]}!" }
+        format.html { redirect_to '/matches', notice: "Unmatched with #{params[:name]}!" }
       end
     end
   end
