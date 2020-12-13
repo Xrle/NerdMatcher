@@ -15,11 +15,13 @@ App.socket = App.cable.subscriptions.create "SocketChannel",
       console.log(data)
       console.log(data['show_on'])
       console.log(data['body'])
+      console.log(data['object'])
       console.log(searchParams.get('id'))
       if (parseInt(searchParams.get('id')) == parseInt(data['show_on']))
         $('#messages').append(data['body']);
         $(document).scrollTop($(document).height());
+        if (data['message_id'] != 'nil')
+          #Tell the server the message has been read
+          @perform 'message_read', {message_id: data['message_id']}
 
 
-  messages: ->
-    @perform 'messages'

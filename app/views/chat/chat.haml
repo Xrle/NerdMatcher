@@ -9,11 +9,10 @@
       %iframe.chat-window{src: "/chat/show_messages?id=#{params[:id]}"}
     .container
       =form_with url: "/chat?id=#{@user.id}", html: {:id => "chat-box"} do |f|
-        .field
+        .field.has-addons
+          .control.is-expanded
+            =f.text_field :message, class: 'input'
           .control
-            =f.text_area :message, class: 'textarea'
-        .field
-          .control
-            =f.submit 'Send', class: 'button is-link is-pulled-right'
+            =f.submit 'Send', class: 'button is-link'
 
 =render 'partials/footer'

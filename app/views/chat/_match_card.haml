@@ -2,7 +2,7 @@
   .card-content
     .content.match-content
       %p.subtitle.match-name= user.name
-      %span.tag.is-info= @current_user.received_messages.where("user_id == #{user.id}").count('read == false')
+      %span.tag.is-info= @current_user.received_messages.where(user_id: user.id, read: false).count
   .card-footer
     =link_to 'Unmatch', '#', method: :delete, class: 'card-footer-item'
     =link_to 'Chat', "/chat?id=#{user.id}", class: 'card-footer-item'

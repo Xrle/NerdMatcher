@@ -1,7 +1,19 @@
 #messages.container
+  -shown_unread = false
   -@messages.each do |m|
     -if m.user_id == @current_user.id
+      -#Show sent message
       =render 'message', type: 'sent', content: m.content
     -else
-      =render 'message', type: 'received', content: m.content
-  %hr
+      -#Show received message
+      -if !shown_unread and m.read == false
+        -shown_unread = true
+        -#Horizontal line to separate off new messages
+        %hr
+        =render 'message', type: 'received', content: m.content
+      -else
+        =render 'message', type: 'received', content: m.content
+
+  -if !shown_unread
+    -# Line at the bottom if there were no unread messages
+    %hr
