@@ -1,6 +1,13 @@
 #wrapper
   =render 'partials/header'
   .section
+    .container.has-text-centered.block
+      -#Show title
+      -if @matches != []
+        %p.title Your Matches
+      -else
+        %p.title You have no matches!
+        %p.subtitle Forever alone :(
     .container
       -#Display matches in a grid with 3 columns
       -until @matches == []

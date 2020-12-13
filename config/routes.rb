@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   #Chat routes
   get 'matches' => 'chat#index'
+  delete 'matches' => 'chat#unmatch'
+
   get 'chat', to: 'chat#chat'
   get 'chat/show_messages', to: 'chat#show_messages'
   post 'chat', to: 'chat#send_message'

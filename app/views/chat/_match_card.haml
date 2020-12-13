@@ -4,5 +4,5 @@
       %p.subtitle.match-name= user.name
       %span.tag.is-info= @current_user.received_messages.where(user_id: user.id, read: false).count
   .card-footer
-    =link_to 'Unmatch', '#', method: :delete, class: 'card-footer-item'
+    =link_to 'Unmatch', '/matches?' + {id: user.id, name: user.name}.to_param, method: :delete, data: {confirm: "Unmatch with #{user.name}?"}, class: 'card-footer-item'
     =link_to 'Chat', "/chat?id=#{user.id}", class: 'card-footer-item'
