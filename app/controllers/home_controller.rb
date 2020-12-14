@@ -71,7 +71,6 @@ class HomeController < ApplicationController
     end
 
     #Either send the email or show the errors
-    puts(errors)
     if errors == []
       ContactMailer.contact_email(name, email, message).deliver_now
       flash[:notice] = t('.email_sent')

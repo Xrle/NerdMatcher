@@ -2,7 +2,7 @@
   =render 'partials/header'
   .section
     .container.has-text-centered
-      %p.title Your Profile
+      %p.title= t('.title')
 
     .container
       =render 'form', url: '/profile', user: @current_user, type: 'edit'

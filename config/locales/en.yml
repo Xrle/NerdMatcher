@@ -74,6 +74,7 @@ en:
 
     contact:
       send: "Send"
+      title: "Contact Us"
 
 
   users:
@@ -84,6 +85,10 @@ en:
     edit:
       delete: "Delete Account"
       delete_confirm: "Are you sure you want to delete your account forever?"
+      title: "Your Profile"
+
+    new:
+      title: "Sign Up"
 
     form:
       sign_up: "Sign Up"

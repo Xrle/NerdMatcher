@@ -16,14 +16,14 @@ two:
   dob: 06/02/1990
   gender: female
 
-associations_one:
+three:
   username: steve
   password_digest: <%= BCrypt::Password.create('steve') %>
   name: Steve Armstrong
   dob: 01/03/1980
   gender: male
 
-associations_two:
+four:
   username: amy
   password_digest: <%= BCrypt::Password.create('amy') %>
   name: Amy Green

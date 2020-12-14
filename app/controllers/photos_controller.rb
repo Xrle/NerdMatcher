@@ -11,9 +11,6 @@ class PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
     @photo.user_id = @current_user.id
 
-    puts @photo.user_id
-    puts @photo.image_data
-
     respond_to do |format|
       if @photo.save
         format.html { redirect_to '/profile/photos', notice: t('.uploaded') }

@@ -11,9 +11,14 @@ class ActiveSupport::TestCase
 
 
   #Log user in
-  def log_in(username, password)
+  def log_in
+    post login_url, params: {username: 'bob', password: 'bob'}
+  end
+
+  def log_in_any(username, password)
     post login_url, params: {username: username, password: password}
   end
+
 
   #Generate test image data
   module TestImage
@@ -33,7 +38,7 @@ class ActiveSupport::TestCase
       }
 
       #Some public domain picture of a car i got from unsplash
-      file = File.open("test/files/image.jpg", binmode: true)
+      file = File.open("test/fixtures/files/image.jpg", binmode: true)
 
       # for performance we skip metadata extraction and assign test metadata
       uploaded_file = Shrine.upload(file, :store, metadata: false)

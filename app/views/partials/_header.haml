@@ -29,7 +29,7 @@
       .navbar-end
         -# Show user menu if logged in
         -if @current_user != nil
-          .navbar-item= t('.logged_in', name: @current_user.name)
+          .navbar-item#current-user= t('.logged_in', name: @current_user.name)
           =link_to t('.log_out'), '/logout', class: 'navbar-item'
 
 
