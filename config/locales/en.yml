@@ -145,7 +145,7 @@ en:
 
 
   match:
-    reverse_error: "This match exists in reverse!"
+    reverse_error: "exists in reverse!"
 
 
   user:
